@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface AdminRepository extends CrudRepository<Admin, Long> {
     Admin findByEmail(String email);
 
-    Admin deleteByUserID(Long userID);
+    void deleteByUserID(Long userID);
 }

@@ -4,11 +4,15 @@ import com.example.demo.Model.History;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface HistoryRepository extends CrudRepository<History, Long> {
-    History findAllByUserID(Long userID);
+    List<History> findAllByUserID(Long userID);
 
-    History findAllByVideoID(Long videoID);
+    List<History> findAllByVideoID(Long videoID);
 
-    History deleteByUserID(Long userID);
+    void deleteByUserID(Long userID);
+
+    //History deleteByVideoID(Long videoID);
 }

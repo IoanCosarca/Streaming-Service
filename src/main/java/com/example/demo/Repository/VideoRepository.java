@@ -10,13 +10,13 @@ import java.util.List;
 public interface VideoRepository extends CrudRepository<Video, Long> {
     Video findByName(String name);
 
-    List<Video> findAllByName(String name);
-
     List<Video> findAllByChannel(String channel);
 
     List<Video> findAllByGenre(String genre);
 
     List<Video> findAllByStartHour(int startHour);
 
-    Video deleteByID(Long id);
+    void deleteByID(Long id);
+
+    void deleteByName(String name);
 }
