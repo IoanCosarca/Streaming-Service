@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String channel;
     private String genre;
@@ -16,11 +16,12 @@ public class Video {
     private String link;
     private int startHour;
     private int endHour;
+    private String status;
 
     public Video() {
     }
 
-    public Video(int id, String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
+    public Video(Long id, String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour, String status)
     {
         this.id = id;
         this.name = name;
@@ -30,9 +31,10 @@ public class Video {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
+        this.status = status;
     }
 
-    public Video(String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
+    public Video(String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour, String status)
     {
         this.name = name;
         this.channel = channel;
@@ -41,13 +43,14 @@ public class Video {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
+        this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -105,5 +108,13 @@ public class Video {
 
     public void setEndHour(int endHour) {
         this.endHour = endHour;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

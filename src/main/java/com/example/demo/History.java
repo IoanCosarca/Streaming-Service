@@ -1,36 +1,53 @@
 package com.example.demo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table
 public class History {
-    private String userID;
-    private String videoID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long userID;
+    private Long videoID;
 
     public History() {
     }
 
-    public History(String userID, String videoID)
+    public History(Long id, Long userID, Long videoID)
+    {
+        this.id = id;
+        this.userID = userID;
+        this.videoID = videoID;
+    }
+
+    public History(Long userID, Long videoID)
     {
         this.userID = userID;
         this.videoID = videoID;
     }
 
-    public String getUserID() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
-    public String getVideoID() {
+    public Long getVideoID() {
         return videoID;
     }
 
-    public void setVideoID(String videoID) {
+    public void setVideoID(Long videoID) {
         this.videoID = videoID;
     }
 }

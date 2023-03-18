@@ -4,58 +4,52 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class User {
+abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private UserType type;
+    private Long userID;
+    private String type;
     private String firstName;
     private String lastName;
     @Column(unique = true)
     private String email;
-    private int age;
-    private String country;
     private String password;
 
     public User() {
     }
 
-    public User(Long id, UserType type, String firstName, String lastName, String email, int age, String country, String password)
+    public User(Long userID, String type, String firstName, String lastName, String email, String password)
     {
-        this.id = id;
+        this.userID = userID;
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.age = age;
-        this.country = country;
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, int age, String country, String password)
+    public User(String type, String firstName, String lastName, String email, String password)
     {
-        this.type = UserType.CLIENT;
+        this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.age = age;
-        this.country = country;
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
-    public UserType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -81,22 +75,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getPassword() {
