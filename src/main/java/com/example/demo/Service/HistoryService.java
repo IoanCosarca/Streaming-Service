@@ -17,6 +17,10 @@ public class HistoryService {
         this.historyRepository = historyRepository;
     }
 
+    public List<History> getHistory() {
+        return historyRepository.findAll();
+    }
+
     public List<History> allVideosWatchedByThisUser(Long userID) {
         return historyRepository.findAllByUserID(userID);
     }
@@ -25,7 +29,13 @@ public class HistoryService {
         return historyRepository.findAllByVideoID(videoID);
     }
 
-    public void deleteUserHistory(Long userID) {
-        historyRepository.deleteByUserID(userID);
+    public void saveHistory(History history) {
+        historyRepository.save(history);
+    }
+
+    public void deleteUserHistory(Long userID)
+    {
+        List<History> histories = historyRepository.findAllByUserID(userID);
+        historyRepository.deleteAll(histories);
     }
 }

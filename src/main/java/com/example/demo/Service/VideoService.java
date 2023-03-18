@@ -17,6 +17,10 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
+    public List<Video> getVideos() {
+        return videoRepository.findAll();
+    }
+
     public Video getVideoByName(String name) {
         return videoRepository.findByName(name);
     }
@@ -33,11 +37,17 @@ public class VideoService {
         return videoRepository.findAllByStartHour(startHour);
     }
 
-    public void deleteVideoByID(Long id) {
-        videoRepository.deleteByID(id);
+    public void saveVideo(Video video) {
+        videoRepository.save(video);
     }
 
-    public void deleteVideoByName(String name) {
-        videoRepository.deleteByName(name);
+    public void deleteVideoByID(Long id) {
+        videoRepository.deleteById(id);
+    }
+
+    public void deleteVideoByName(String name)
+    {
+        Video video = videoRepository.findByName(name);
+        videoRepository.deleteById(video.getId());
     }
 }

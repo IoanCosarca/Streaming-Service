@@ -17,6 +17,10 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
+    public List<Client> getClients() {
+        return clientRepository.findAll();
+    }
+
     public Client getClientByEmail(String email) {
         return clientRepository.findByEmail(email);
     }
@@ -29,7 +33,11 @@ public class ClientService {
         return clientRepository.findAllByCountry(country);
     }
 
-    public void deleteByUserID(Long userID) {
-        clientRepository.deleteByUserID(userID);
+    public void saveClient(Client client) {
+        clientRepository.save(client);
+    }
+
+    public void deleteByID(Long id) {
+        clientRepository.deleteById(id);
     }
 }
