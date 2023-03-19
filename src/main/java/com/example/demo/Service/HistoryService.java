@@ -1,7 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.DAO.HistoryDAO;
 import com.example.demo.Model.History;
-import com.example.demo.Repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,33 +9,39 @@ import java.util.List;
 
 @Service
 public class HistoryService {
-    private HistoryRepository historyRepository;
+    private HistoryDAO dao;
 
     @Autowired
-    public HistoryService(HistoryRepository historyRepository)
+    public HistoryService(HistoryDAO dao)
     {
-        this.historyRepository = historyRepository;
+        this.dao = dao;
     }
 
     public List<History> getHistory() {
-        return historyRepository.findAll();
+        return dao.getAll();
     }
 
     public List<History> allVideosWatchedByThisUser(Long userID) {
-        return historyRepository.findAllByUserID(userID);
+        return dao.findAllByUserID(userID);
     }
 
     public List<History> allUsersWatchingThisVideo(Long videoID) {
-        return historyRepository.findAllByVideoID(videoID);
+        return dao.findAllByVideoID(videoID);
     }
 
     public void saveHistory(History history) {
-        historyRepository.save(history);
+        dao.save(history);
     }
 
-    public void deleteUserHistory(Long userID)
-    {
-        List<History> histories = historyRepository.findAllByUserID(userID);
-        historyRepository.deleteAll(histories);
+    public void updateHistory(History history) {
+        dao.update(history);
+    }
+
+    public void deleteHistoryByID(Long id) {
+        dao.delete(id);
+    }
+
+    public void deleteUserHistory(Long userID) {
+        dao.delete(userID);
     }
 }

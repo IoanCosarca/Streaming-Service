@@ -1,7 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.DAO.AdminDAO;
 import com.example.demo.Model.Admin;
-import com.example.demo.Repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,27 +9,35 @@ import java.util.List;
 
 @Service
 public class AdminService {
-    private AdminRepository adminRepository;
+    private AdminDAO dao;
 
     @Autowired
-    public AdminService(AdminRepository adminRepository)
+    public AdminService(AdminDAO dao)
     {
-        this.adminRepository = adminRepository;
+        this.dao = dao;
     }
 
     public List<Admin> getAdmins() {
-        return adminRepository.findAll();
+        return dao.getAll();
+    }
+
+    public Admin getAdminByID(Long id) {
+        return dao.findByID(id);
     }
 
     public Admin getAdminByEmail(String email) {
-        return adminRepository.findByEmail(email);
+        return dao.findByEmail(email);
     }
 
     public void saveAdmin(Admin admin) {
-        adminRepository.save(admin);
+        dao.save(admin);
+    }
+
+    public void updateAdmin(Admin admin) {
+        dao.update(admin);
     }
 
     public void deleteAdminByID(Long id) {
-        adminRepository.deleteById(id);
+        dao.delete(id);
     }
 }

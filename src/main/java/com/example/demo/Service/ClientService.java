@@ -1,7 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.DAO.ClientDAO;
 import com.example.demo.Model.Client;
-import com.example.demo.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,35 +9,43 @@ import java.util.List;
 
 @Service
 public class ClientService {
-    private ClientRepository clientRepository;
+    private ClientDAO dao;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository)
+    public ClientService(ClientDAO dao)
     {
-        this.clientRepository = clientRepository;
+        this.dao = dao;
     }
 
     public List<Client> getClients() {
-        return clientRepository.findAll();
+        return dao.getAll();
+    }
+
+    public Client getClientByID(Long id) {
+        return dao.findByID(id);
     }
 
     public Client getClientByEmail(String email) {
-        return clientRepository.findByEmail(email);
+        return dao.findByEmail(email);
     }
 
     public List<Client> getClientsByAge(int age) {
-        return clientRepository.findAllByAge(age);
+        return dao.findAllByAge(age);
     }
 
     public List<Client> getClientsByCountry(String country) {
-        return clientRepository.findAllByCountry(country);
+        return dao.findAllByCountry(country);
     }
 
     public void saveClient(Client client) {
-        clientRepository.save(client);
+        dao.save(client);
+    }
+
+    public void updateClient(Client client) {
+        dao.update(client);
     }
 
     public void deleteByID(Long id) {
-        clientRepository.deleteById(id);
+        dao.delete(id);
     }
 }

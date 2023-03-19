@@ -22,6 +22,11 @@ public class AdminController {
         return adminService.getAdmins();
     }
 
+    @GetMapping("/getAdmin/{id}")
+    public Admin getAdminByID(@PathVariable Long id) {
+        return adminService.getAdminByID(id);
+    }
+
     @GetMapping("/getAdmin/{email}")
     public Admin getAdminByEmail(@PathVariable String email) {
         return adminService.getAdminByEmail(email);
@@ -30,6 +35,11 @@ public class AdminController {
     @PostMapping("/addAdmin")
     public void addAdmin(@RequestBody Admin admin) {
         adminService.saveAdmin(admin);
+    }
+
+    @PutMapping("/updateAdmin")
+    public void updateAdmin(@RequestBody Admin admin) {
+        adminService.updateAdmin(admin);
     }
 
     @DeleteMapping("/deleteAdmin/{id}")

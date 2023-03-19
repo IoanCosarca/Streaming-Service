@@ -1,7 +1,7 @@
 package com.example.demo.Service;
 
+import com.example.demo.DAO.VideoDAO;
 import com.example.demo.Model.Video;
-import com.example.demo.Repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,45 +9,49 @@ import java.util.List;
 
 @Service
 public class VideoService {
-    private VideoRepository videoRepository;
+    private VideoDAO dao;
 
     @Autowired
-    public VideoService(VideoRepository videoRepository)
+    public VideoService(VideoDAO dao)
     {
-        this.videoRepository = videoRepository;
+        this.dao = dao;
     }
 
     public List<Video> getVideos() {
-        return videoRepository.findAll();
+        return dao.getAll();
     }
 
     public Video getVideoByName(String name) {
-        return videoRepository.findByName(name);
+        return dao.findByName(name);
     }
 
     public List<Video> getVideosByChannel(String channel) {
-        return videoRepository.findAllByChannel(channel);
+        return dao.findAllByChannel(channel);
     }
 
     public List<Video> getVideosByGenre(String genre) {
-        return videoRepository.findAllByGenre(genre);
+        return dao.findAllByGenre(genre);
     }
 
     public List<Video> getVideosByStartHour(int startHour) {
-        return videoRepository.findAllByStartHour(startHour);
+        return dao.findAllByStartHour(startHour);
     }
 
     public void saveVideo(Video video) {
-        videoRepository.save(video);
+        dao.save(video);
+    }
+
+    public void updateVideos(Video video) {
+        dao.update(video);
     }
 
     public void deleteVideoByID(Long id) {
-        videoRepository.deleteById(id);
+        dao.delete(id);
     }
 
     public void deleteVideoByName(String name)
     {
-        Video video = videoRepository.findByName(name);
-        videoRepository.deleteById(video.getId());
+        Video video = dao.findByName(name);
+        dao.delete(video.getId());
     }
 }

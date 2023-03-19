@@ -37,6 +37,16 @@ public class HistoryController {
         historyService.saveHistory(history);
     }
 
+    @PutMapping("/updateHistory")
+    public void updateHistory(@RequestBody History history) {
+        historyService.updateHistory(history);
+    }
+
+    @DeleteMapping("/deleteHistoryByID/{id}")
+    public void deleteHistoryByID(@PathVariable Long id) {
+        historyService.deleteHistoryByID(id);
+    }
+
     @DeleteMapping("/deleteUserHistory/{userID}")
     public void deleteUserHistory(@PathVariable Long userID) {
         historyService.deleteUserHistory(userID);
