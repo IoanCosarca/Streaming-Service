@@ -2,11 +2,7 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
 public class Admin extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Admin() {

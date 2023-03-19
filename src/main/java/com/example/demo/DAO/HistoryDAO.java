@@ -2,6 +2,7 @@ package com.example.demo.DAO;
 
 import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.History;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class HistoryDAO implements DAO<History> {
     @Override
     public List<History> getAll()

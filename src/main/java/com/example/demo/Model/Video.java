@@ -2,18 +2,12 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
 public class Video {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
     private String name;
     private String channel;
     private String genre;
     private boolean ageRestriction;
-    @Column(unique = true)
     private String link;
     private int startHour;
     private int endHour;

@@ -2,11 +2,7 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
 public class Client extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int age;
     private String country;

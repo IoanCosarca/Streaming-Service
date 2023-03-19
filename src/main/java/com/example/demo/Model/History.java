@@ -2,11 +2,7 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
 public class History {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userID;
     private Long videoID;

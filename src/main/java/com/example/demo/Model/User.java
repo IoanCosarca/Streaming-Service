@@ -2,16 +2,11 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table
 abstract class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userID;
     private String type;
     private String firstName;
     private String lastName;
-    @Column(unique = true)
     private String email;
     private String password;
 

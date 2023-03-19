@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class ConnectionFactory {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DBURL = "jdbc:mysql://localhost:3306/Database";
+    private static final String DBURL = "jdbc:mysql://localhost:3306/streamingservice";
     private static final String USER = "root";
     private static final String PASS = "@Boby64299";
 
@@ -49,7 +49,7 @@ public class ConnectionFactory {
     }
 
     /**
-     * Method for closeing a connection
+     * Method for closing a connection
      * @param connection connection to close
      */
     public static void close(Connection connection) {
