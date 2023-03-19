@@ -22,28 +22,29 @@ public class VideoController {
         return videoService.getVideos();
     }
 
-    @GetMapping("/getVideo/{name}")
+    @GetMapping("/getVideoByName/{name}")
     public Video getVideoByName(@PathVariable String name) {
         return videoService.getVideoByName(name);
     }
 
-    @GetMapping("/getVideos/{channel}")
+    @GetMapping("/getVideosByChannel/{channel}")
     public List<Video> getVideosByChannel(@PathVariable String channel) {
         return videoService.getVideosByChannel(channel);
     }
 
-    @GetMapping("/getVideos/{genre}")
+    @GetMapping("/getVideosByGenre/{genre}")
     public List<Video> getVideosByGenre(@PathVariable String genre) {
         return videoService.getVideosByGenre(genre);
     }
 
-    @GetMapping("/getVideos/{startHour}")
+    @GetMapping("/getVideosByHour/{startHour}")
     public List<Video> getVideosByStartHour(@PathVariable int startHour) {
         return videoService.getVideosByStartHour(startHour);
     }
 
     @PostMapping("/addVideo")
-    public void addVideoPost(@RequestBody Video video) {
+    public void addVideo(@RequestBody Video video) {
+        System.out.println(video.toString());
         videoService.saveVideo(video);
     }
 
@@ -52,12 +53,12 @@ public class VideoController {
         videoService.updateVideos(video);
     }
 
-    @DeleteMapping("/deleteVideo/{id}")
+    @DeleteMapping("/deleteVideoByID/{id}")
     public void deleteVideoByID(@PathVariable Long id) {
         videoService.deleteVideoByID(id);
     }
 
-    @DeleteMapping("/deleteVideo/{name}")
+    @DeleteMapping("/deleteVideoByName/{name}")
     public void deleteVideoByName(@PathVariable String name) {
         videoService.deleteVideoByName(name);
     }

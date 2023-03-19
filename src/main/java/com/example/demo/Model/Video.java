@@ -112,4 +112,19 @@ public class Video {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", channel='" + channel + '\'' +
+                ", genre='" + genre + '\'' +
+                ", ageRestriction=" + ageRestriction +
+                ", link='" + link + '\'' +
+                ", startHour=" + startHour +
+                ", endHour=" + endHour +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

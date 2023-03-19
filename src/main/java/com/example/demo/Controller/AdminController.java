@@ -22,12 +22,12 @@ public class AdminController {
         return adminService.getAdmins();
     }
 
-    @GetMapping("/getAdmin/{id}")
+    @GetMapping("/getAdminByID/{id}")
     public Admin getAdminByID(@PathVariable Long id) {
         return adminService.getAdminByID(id);
     }
 
-    @GetMapping("/getAdmin/{email}")
+    @GetMapping("/getAdminByEmail/{email}")
     public Admin getAdminByEmail(@PathVariable String email) {
         return adminService.getAdminByEmail(email);
     }

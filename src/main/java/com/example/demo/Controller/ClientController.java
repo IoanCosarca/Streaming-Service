@@ -22,22 +22,22 @@ public class ClientController {
         return clientService.getClients();
     }
 
-    @GetMapping("/getClient/{id}")
+    @GetMapping("/getClientByID/{id}")
     public Client getClientByID(@PathVariable Long id) {
         return clientService.getClientByID(id);
     }
 
-    @GetMapping("/getClient/{email}")
+    @GetMapping("/getClientByEmail/{email}")
     public Client getClientByEmail(@PathVariable String email) {
         return clientService.getClientByEmail(email);
     }
 
-    @GetMapping("/getClients/{age}")
+    @GetMapping("/getClientsByAge/{age}")
     public List<Client> getClientsByAge(@PathVariable int age) {
         return clientService.getClientsByAge(age);
     }
 
-    @GetMapping("/getClients/{country}")
+    @GetMapping("/getClientsByCountry/{country}")
     public List<Client> getClientsByCountry(@PathVariable String country) {
         return clientService.getClientsByCountry(country);
     }
