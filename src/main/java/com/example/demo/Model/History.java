@@ -2,6 +2,9 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 
+/**
+ * Class that is mapped with the database table with the same name.
+ */
 public class History {
     private Long id;
     private Long userID;

@@ -11,8 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Defines all the methods and queries for accessing the Video table in the database.
+ */
 @Repository
 public class VideoDAO implements DAO<Video> {
+    /**
+     * Gets the connection, calls a query to get all the entries in the database and returns them as list.
+     * @return List[Video]
+     */
     @Override
     public List<Video> getAll()
     {
@@ -41,6 +48,11 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get the Video from the database with the given name and returns it.
+     * @param name - selection criteria
+     * @return Video
+     */
     public Video findByName(String name)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -65,6 +77,11 @@ public class VideoDAO implements DAO<Video> {
         }
     }
 
+    /**
+     * Gets the connection, calls a query to get all the Videos in the database from a specified channel and returns them as list.
+     * @param channel - selection criteria
+     * @return List[Video]
+     */
     public List<Video> findAllByChannel(String channel)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -93,6 +110,11 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get all the Videos in the database of a specified genre and returns them as list.
+     * @param genre - selection criteria
+     * @return List[Video]
+     */
     public List<Video> findAllByGenre(String genre)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -121,6 +143,11 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get all the Videos in the database that start at a specified hour and returns them as list.
+     * @param startHour - selection criteria
+     * @return List[Video]
+     */
     public List<Video> findAllByStartHour(int startHour)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -149,6 +176,12 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
+    /**
+     * Give a result set entry from a query, constructs a Video object with the fields and returns it.
+     * @param rs - result set containing the fields from the table
+     * @return Video
+     * @throws SQLException - the SQL exception will be handled where the method is called
+     */
     private Video constructVideo(ResultSet rs) throws SQLException
     {
         Video video = new Video();
@@ -164,6 +197,10 @@ public class VideoDAO implements DAO<Video> {
         return video;
     }
 
+    /**
+     * Gets the connection and calls a query to insert the received Video object into the database.
+     * @param video - the new Video table entry
+     */
     @Override
     public void save(Video video)
     {
@@ -194,6 +231,10 @@ public class VideoDAO implements DAO<Video> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to update the database with the Video object.
+     * @param video - object containing the new information for the Video with the same id
+     */
     @Override
     public void update(Video video)
     {
@@ -225,6 +266,10 @@ public class VideoDAO implements DAO<Video> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to delete the entry with the given id from the database.
+     * @param id - delete criteria
+     */
     @Override
     public void delete(Long id)
     {

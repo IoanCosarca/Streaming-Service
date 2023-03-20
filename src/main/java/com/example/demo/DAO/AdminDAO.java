@@ -12,8 +12,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Defines all the methods and queries for accessing the Admin table in the database.
+ */
 @Repository
 public class AdminDAO implements DAO<Admin> {
+    /**
+     * Gets the connection, calls a query to get all the entries in the database and returns them as list.
+     * @return List[Admin]
+     */
     @Override
     public List<Admin> getAll()
     {
@@ -42,6 +49,11 @@ public class AdminDAO implements DAO<Admin> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get the object from the database with the given id and returns it.
+     * @param id - selection criteria
+     * @return Admin
+     */
     public Admin findByID(Long id)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -66,6 +78,11 @@ public class AdminDAO implements DAO<Admin> {
         }
     }
 
+    /**
+     * Gets the connection, calls a query to get the object from the database with the given email and returns it.
+     * @param email - selection criteria
+     * @return Admin
+     */
     public Admin findByEmail(String email)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -90,6 +107,12 @@ public class AdminDAO implements DAO<Admin> {
         }
     }
 
+    /**
+     * Give a result set entry from a query, constructs an Admin object with the fields and returns it.
+     * @param rs - result set containing the fields from the table
+     * @return Admin
+     * @throws SQLException - the SQL exception will be handled where the method is called
+     */
     private Admin constructAdmin(ResultSet rs) throws SQLException
     {
         Admin admin = new Admin();
@@ -98,6 +121,10 @@ public class AdminDAO implements DAO<Admin> {
         return admin;
     }
 
+    /**
+     * Gets the connection and calls a query to insert the received Admin object into the database.
+     * @param admin - the new Admin table entry
+     */
     @Override
     public void save(Admin admin)
     {
@@ -130,6 +157,10 @@ public class AdminDAO implements DAO<Admin> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to update the database with the Admin object.
+     * @param admin - object containing the new information for the Admin with the same id
+     */
     @Override
     public void update(Admin admin)
     {
@@ -157,6 +188,10 @@ public class AdminDAO implements DAO<Admin> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to delete the entry with the given id from the database.
+     * @param id - delete criteria
+     */
     @Override
     public void delete(Long id)
     {

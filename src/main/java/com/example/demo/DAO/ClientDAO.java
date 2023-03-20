@@ -11,8 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Defines all the methods and queries for accessing the Client table in the database.
+ */
 @Repository
 public class ClientDAO implements DAO<Client> {
+    /**
+     * Gets the connection, calls a query to get all the entries in the database and returns them as list.
+     * @return List[Client]
+     */
     @Override
     public List<Client> getAll()
     {
@@ -41,6 +48,11 @@ public class ClientDAO implements DAO<Client> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get the object from the database with the given id and returns it.
+     * @param id - selection criteria
+     * @return Client
+     */
     public Client findByID(Long id)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -65,6 +77,11 @@ public class ClientDAO implements DAO<Client> {
         }
     }
 
+    /**
+     * Gets the connection, calls a query to get the object from the database with the given email and returns it.
+     * @param email - selection criteria
+     * @return Client
+     */
     public Client findByEmail(String email)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -89,6 +106,11 @@ public class ClientDAO implements DAO<Client> {
         }
     }
 
+    /**
+     * Gets the connection, calls a query to get all the Clients in the database who have a specified age and returns them as list.
+     * @param age - selection criteria
+     * @return List[Client]
+     */
     public List<Client> findAllByAge(int age)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -117,6 +139,11 @@ public class ClientDAO implements DAO<Client> {
         return list;
     }
 
+    /**
+     * Gets the connection, calls a query to get all the Clients in the database from a specified country and returns them as list.
+     * @param country - selection criteria
+     * @return List[Client]
+     */
     public List<Client> findAllByCountry(String country)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
@@ -145,6 +172,12 @@ public class ClientDAO implements DAO<Client> {
         return list;
     }
 
+    /**
+     * Give a result set entry from a query, constructs a Client object with the fields and returns it.
+     * @param rs - result set containing the fields from the table
+     * @return Client
+     * @throws SQLException - the SQL exception will be handled where the method is called
+     */
     private Client constructClient(ResultSet rs) throws SQLException
     {
         Client client = new Client();
@@ -155,6 +188,10 @@ public class ClientDAO implements DAO<Client> {
         return client;
     }
 
+    /**
+     * Gets the connection and calls a query to insert the received Client object into the database.
+     * @param client - the new Client table entry
+     */
     @Override
     public void save(Client client)
     {
@@ -189,6 +226,10 @@ public class ClientDAO implements DAO<Client> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to update the database with the Client object.
+     * @param client - object containing the new information for the Client with the same id
+     */
     @Override
     public void update(Client client)
     {
@@ -223,6 +264,10 @@ public class ClientDAO implements DAO<Client> {
         }
     }
 
+    /**
+     * Gets the connection and calls a query to delete the entry with the given id from the database.
+     * @param id - delete criteria
+     */
     @Override
     public void delete(Long id)
     {
