@@ -64,6 +64,7 @@ public class VideoDAO implements DAO<Video> {
             statement = dbConnection.prepareStatement(query);
             statement.setString(1, name);
             rs = statement.executeQuery();
+            rs.next();
             return constructVideo(rs);
         }
         catch (SQLException e) {
@@ -206,19 +207,20 @@ public class VideoDAO implements DAO<Video> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query = "INSERT INTO video (name, channel, genre, ageRestriction, link, startHour, endHour, status) ";
-        query += "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO video (id, name, channel, genre, ageRestriction, link, startHour, endHour, status) ";
+        query += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
             statement = dbConnection.prepareStatement(query);
-            statement.setString(1, video.getName());
-            statement.setString(2, video.getChannel());
-            statement.setString(3, video.getGenre());
-            statement.setBoolean(4, video.isAgeRestriction());
-            statement.setString(5, video.getLink());
-            statement.setInt(6, video.getStartHour());
-            statement.setInt(7, video.getEndHour());
-            statement.setString(8, video.getStatus());
+            statement.setLong(1, video.getId());
+            statement.setString(2, video.getName());
+            statement.setString(3, video.getChannel());
+            statement.setString(4, video.getGenre());
+            statement.setBoolean(5, video.isAgeRestriction());
+            statement.setString(6, video.getLink());
+            statement.setInt(7, video.getStartHour());
+            statement.setInt(8, video.getEndHour());
+            statement.setString(9, video.getStatus());
             statement.executeUpdate();
         }
         catch (SQLException e) {

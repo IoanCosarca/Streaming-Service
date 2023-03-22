@@ -2,7 +2,6 @@ package com.example.demo.DAO;
 
 import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.Admin;
-import com.example.demo.Model.Client;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -65,6 +64,7 @@ public class AdminDAO implements DAO<Admin> {
             statement = dbConnection.prepareStatement(query);
             statement.setLong(1, id);
             rs = statement.executeQuery();
+            rs.next();
             return constructAdmin(rs);
         }
         catch (SQLException e) {
@@ -88,12 +88,13 @@ public class AdminDAO implements DAO<Admin> {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM admin WHERE email = ?";
+        String query = "SELECT * FROM user WHERE email = ?";
         try
         {
             statement = dbConnection.prepareStatement(query);
             statement.setString(1, email);
             rs = statement.executeQuery();
+            rs.next();
             return constructAdmin(rs);
         }
         catch (SQLException e) {
@@ -130,21 +131,23 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO admin (userID) VALUES (?)";
-        String query2 = "INSERT INTO user (type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)";
+        String query1 = "INSERT INTO admin (id, userID) VALUES (?, ?)";
+        String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         try
         {
             // Insert in the Admin Table
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, admin.getUserID());
+            statement.setLong(1, admin.getId());
+            statement.setLong(2, admin.getUserID());
             statement.executeUpdate();
             // Insert in the User Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setString(1, admin.getType());
-            statement.setString(2, admin.getFirstName());
-            statement.setString(3, admin.getLastName());
-            statement.setString(4, admin.getEmail());
-            statement.setString(5, admin.getPassword());
+            statement.setLong(1, admin.getUserID());
+            statement.setString(2, admin.getType());
+            statement.setString(3, admin.getFirstName());
+            statement.setString(4, admin.getLastName());
+            statement.setString(5, admin.getEmail());
+            statement.setString(6, admin.getPassword());
             statement.executeUpdate();
         }
         catch (SQLException e) {

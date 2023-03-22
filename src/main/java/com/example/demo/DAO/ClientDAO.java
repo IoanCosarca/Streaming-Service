@@ -64,6 +64,7 @@ public class ClientDAO implements DAO<Client> {
             statement = dbConnection.prepareStatement(query);
             statement.setLong(1, id);
             rs = statement.executeQuery();
+            rs.next();
             return constructClient(rs);
         }
         catch (SQLException e) {
@@ -87,12 +88,13 @@ public class ClientDAO implements DAO<Client> {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM client WHERE email = ?";
+        String query = "SELECT * FROM user WHERE email = ?";
         try
         {
             statement = dbConnection.prepareStatement(query);
             statement.setString(1, email);
             rs = statement.executeQuery();
+            rs.next();
             return constructClient(rs);
         }
         catch (SQLException e) {
@@ -117,7 +119,7 @@ public class ClientDAO implements DAO<Client> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         List<Client> list = new ArrayList<>();
-        String query = "SELECT * FROM client WHERE age = ?";
+        String query = "SELECT * FROM user WHERE age = ?";
         try
         {
             statement = dbConnection.prepareStatement(query);
@@ -150,7 +152,7 @@ public class ClientDAO implements DAO<Client> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         List<Client> list = new ArrayList<>();
-        String query = "SELECT * FROM client WHERE country = ?";
+        String query = "SELECT * FROM user WHERE country = ?";
         try
         {
             statement = dbConnection.prepareStatement(query);
@@ -197,23 +199,25 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO client (userID, age, country) VALUES (?, ?, ?)";
-        String query2 = "INSERT INTO user (type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)";
+        String query1 = "INSERT INTO client (id, userID, age, country) VALUES (?, ?, ?, ?)";
+        String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         try
         {
             // Insert in the Client Table
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, client.getUserID());
-            statement.setInt(2, client.getAge());
-            statement.setString(3, client.getCountry());
+            statement.setLong(1, client.getId());
+            statement.setLong(2, client.getUserID());
+            statement.setInt(3, client.getAge());
+            statement.setString(4, client.getCountry());
             statement.executeUpdate();
             // Insert in the User Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setString(1, client.getType());
-            statement.setString(2, client.getFirstName());
-            statement.setString(3, client.getLastName());
-            statement.setString(4, client.getEmail());
-            statement.setString(5, client.getPassword());
+            statement.setLong(1, client.getUserID());
+            statement.setString(2, client.getType());
+            statement.setString(3, client.getFirstName());
+            statement.setString(4, client.getLastName());
+            statement.setString(5, client.getEmail());
+            statement.setString(6, client.getPassword());
             statement.executeUpdate();
         }
         catch (SQLException e) {

@@ -138,12 +138,13 @@ public class HistoryDAO implements DAO<History> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query = "INSERT INTO history (userID, videoID) VALUES (?, ?)";
+        String query = "INSERT INTO history (id, userID, videoID) VALUES (?, ?, ?)";
         try
         {
             statement = dbConnection.prepareStatement(query);
-            statement.setLong(1, history.getUserID());
-            statement.setLong(2, history.getVideoID());
+            statement.setLong(1, history.getId());
+            statement.setLong(2, history.getUserID());
+            statement.setLong(3, history.getVideoID());
             statement.executeUpdate();
         }
         catch (SQLException e) {
