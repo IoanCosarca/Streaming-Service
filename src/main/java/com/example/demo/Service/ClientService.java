@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.DAO.ClientDAO;
+import com.example.demo.DAO.DAO;
 import com.example.demo.Model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,10 @@ import java.util.List;
  */
 @Service
 public class ClientService {
-    private ClientDAO dao;
+    private DAO<Client> dao;
 
     @Autowired
-    public ClientService(ClientDAO dao)
+    public ClientService(DAO<Client> dao)
     {
         this.dao = dao;
     }

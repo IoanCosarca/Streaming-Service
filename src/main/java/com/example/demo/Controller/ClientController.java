@@ -91,7 +91,7 @@ public class ClientController {
      * Deletes the Client with the specified id.
      * @param id - delete criteria
      */
-    @DeleteMapping("/deleteClient")
+    @DeleteMapping("/deleteClient/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.deleteByID(id);
     }

@@ -25,15 +25,22 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
+        ResultSet rsC = null;
+        ResultSet rsU = null;
         List<Client> list = new ArrayList<>();
-        String query = "SELECT * FROM client";
+        String query1 = "SELECT * FROM client";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                list.add(constructClient(rs));
+            statement = dbConnection.prepareStatement(query1);
+            rsC = statement.executeQuery();
+            while (rsC.next())
+            {
+                statement = dbConnection.prepareStatement(query2);
+                statement.setLong(1, rsC.getLong("userID"));
+                rsU = statement.executeQuery();
+                rsU.next();
+                list.add(constructClient(rsC, rsU));
             }
         }
         catch (SQLException e) {
@@ -41,7 +48,8 @@ public class ClientDAO implements DAO<Client> {
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsC);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -57,22 +65,29 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = "SELECT * FROM client WHERE id = ?";
+        ResultSet rsC = null;
+        ResultSet rsU = null;
+        String query1 = "SELECT * FROM client WHERE id = ?";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setLong(1, id);
-            rs = statement.executeQuery();
-            rs.next();
-            return constructClient(rs);
+            rsC = statement.executeQuery();
+            rsC.next();
+            statement = dbConnection.prepareStatement(query2);
+            statement.setLong(1, rsC.getLong("userID"));
+            rsU = statement.executeQuery();
+            rsU.next();
+            return constructClient(rsC, rsU);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsC);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -87,22 +102,29 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = "SELECT * FROM user WHERE email = ?";
+        ResultSet rsC = null;
+        ResultSet rsU = null;
+        String query1 = "SELECT * FROM user WHERE email = ?";
+        String query2 = "SELECT * FROM client WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setString(1, email);
-            rs = statement.executeQuery();
-            rs.next();
-            return constructClient(rs);
+            rsU = statement.executeQuery();
+            rsU.next();
+            statement = dbConnection.prepareStatement(query2);
+            statement.setLong(1, rsU.getLong("userID"));
+            rsC = statement.executeQuery();
+            rsC.next();
+            return constructClient(rsC, rsU);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsC);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -117,16 +139,23 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
+        ResultSet rsC = null;
+        ResultSet rsU = null;
         List<Client> list = new ArrayList<>();
-        String query = "SELECT * FROM user WHERE age = ?";
+        String query1 = "SELECT * FROM client WHERE age = ?";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setInt(1, age);
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                list.add(constructClient(rs));
+            rsC = statement.executeQuery();
+            while (rsC.next())
+            {
+                statement = dbConnection.prepareStatement(query2);
+                statement.setLong(1, rsC.getLong("userID"));
+                rsU = statement.executeQuery();
+                rsU.next();
+                list.add(constructClient(rsC, rsU));
             }
         }
         catch (SQLException e) {
@@ -134,7 +163,8 @@ public class ClientDAO implements DAO<Client> {
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsC);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -150,16 +180,23 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
+        ResultSet rsC = null;
+        ResultSet rsU = null;
         List<Client> list = new ArrayList<>();
-        String query = "SELECT * FROM user WHERE country = ?";
+        String query1 = "SELECT * FROM client WHERE country = ?";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setString(1, country);
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                list.add(constructClient(rs));
+            rsC = statement.executeQuery();
+            while (rsC.next())
+            {
+                statement = dbConnection.prepareStatement(query2);
+                statement.setLong(1, rsC.getLong("userID"));
+                rsU = statement.executeQuery();
+                rsU.next();
+                list.add(constructClient(rsC, rsU));
             }
         }
         catch (SQLException e) {
@@ -167,7 +204,8 @@ public class ClientDAO implements DAO<Client> {
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsC);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -176,17 +214,23 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Give a result set entry from a query, constructs a Client object with the fields and returns it.
-     * @param rs - result set containing the fields from the table
+     * @param rsC - result set containing the fields from the Client table
+     * @param rsU - result set containing the fields from the User table
      * @return Client
      * @throws SQLException - the SQL exception will be handled where the method is called
      */
-    private Client constructClient(ResultSet rs) throws SQLException
+    private Client constructClient(ResultSet rsC, ResultSet rsU) throws SQLException
     {
         Client client = new Client();
-        client.setId(rs.getLong("id"));
-        client.setUserID(rs.getLong("userID"));
-        client.setAge(rs.getInt("age"));
-        client.setCountry(rs.getString("country"));
+        client.setId(rsC.getLong("id"));
+        client.setUserID(rsC.getLong("userID"));
+        client.setType(rsU.getString("type"));
+        client.setFirstName(rsU.getString("firstName"));
+        client.setLastName(rsU.getString("lastName"));
+        client.setEmail(rsU.getString("email"));
+        client.setPassword(rsU.getString("password"));
+        client.setAge(rsC.getInt("age"));
+        client.setCountry(rsC.getString("country"));
         return client;
     }
 
@@ -199,25 +243,25 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO client (id, userID, age, country) VALUES (?, ?, ?, ?)";
-        String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String query1 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String query2 = "INSERT INTO client (id, userID, age, country) VALUES (?, ?, ?, ?)";
         try
         {
-            // Insert in the Client Table
-            statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, client.getId());
-            statement.setLong(2, client.getUserID());
-            statement.setInt(3, client.getAge());
-            statement.setString(4, client.getCountry());
-            statement.executeUpdate();
             // Insert in the User Table
-            statement = dbConnection.prepareStatement(query2);
+            statement = dbConnection.prepareStatement(query1);
             statement.setLong(1, client.getUserID());
             statement.setString(2, client.getType());
             statement.setString(3, client.getFirstName());
             statement.setString(4, client.getLastName());
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPassword());
+            statement.executeUpdate();
+            // Insert in the Client Table
+            statement = dbConnection.prepareStatement(query2);
+            statement.setLong(1, client.getId());
+            statement.setLong(2, client.getUserID());
+            statement.setInt(3, client.getAge());
+            statement.setString(4, client.getCountry());
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -300,4 +344,37 @@ public class ClientDAO implements DAO<Client> {
             ConnectionFactory.close(dbConnection);
         }
     }
+
+    @Override
+    public Client findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllByChannel(String channel) {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllByGenre(String genre) {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllByStartHour(int startHour) {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllByUserID(Long userID) {
+        return null;
+    }
+
+    @Override
+    public List<Client> findAllByVideoID(Long videoID) {
+        return null;
+    }
+
+    @Override
+    public void deleteUserHistory(Long userID) {}
 }

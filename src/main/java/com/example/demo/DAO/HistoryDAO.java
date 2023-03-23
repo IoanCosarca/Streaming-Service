@@ -210,4 +210,69 @@ public class HistoryDAO implements DAO<History> {
             ConnectionFactory.close(dbConnection);
         }
     }
+
+    /**
+     * Gets the connection and calls a query to delete the watch history of the user with the specified id from the database.
+     * @param userID - delete criteria
+     */
+    public void deleteUserHistory(Long userID)
+    {
+        Connection dbConnection = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        String query = "DELETE FROM history WHERE userID = ?";
+        try
+        {
+            statement = dbConnection.prepareStatement(query);
+            statement.setLong(1, userID);
+            statement.execute();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            ConnectionFactory.close(statement);
+            ConnectionFactory.close(dbConnection);
+        }
+    }
+
+    @Override
+    public History findByID(Long id) {
+        return null;
+    }
+
+    @Override
+    public History findByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public List<History> findAllByAge(int age) {
+        return null;
+    }
+
+    @Override
+    public List<History> findAllByCountry(String country) {
+        return null;
+    }
+
+    @Override
+    public History findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<History> findAllByChannel(String channel) {
+        return null;
+    }
+
+    @Override
+    public List<History> findAllByGenre(String genre) {
+        return null;
+    }
+
+    @Override
+    public List<History> findAllByStartHour(int startHour) {
+        return null;
+    }
 }

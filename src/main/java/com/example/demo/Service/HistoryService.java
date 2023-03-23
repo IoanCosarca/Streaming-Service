@@ -1,6 +1,6 @@
 package com.example.demo.Service;
 
-import com.example.demo.DAO.HistoryDAO;
+import com.example.demo.DAO.DAO;
 import com.example.demo.Model.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Service
 public class HistoryService {
-    private HistoryDAO dao;
+    private DAO<History> dao;
 
     @Autowired
-    public HistoryService(HistoryDAO dao)
+    public HistoryService(DAO<History> dao)
     {
         this.dao = dao;
     }
@@ -75,6 +75,6 @@ public class HistoryService {
      * @param userID - delete criteria
      */
     public void deleteUserHistory(Long userID) {
-        dao.delete(userID);
+        dao.deleteUserHistory(userID);
     }
 }

@@ -25,15 +25,22 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
+        ResultSet rsA = null;
+        ResultSet rsU = null;
         List<Admin> list = new ArrayList<>();
-        String query = "SELECT * FROM admin";
+        String query1 = "SELECT * FROM admin";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                list.add(constructAdmin(rs));
+            statement = dbConnection.prepareStatement(query1);
+            rsA = statement.executeQuery();
+            while (rsA.next())
+            {
+                statement = dbConnection.prepareStatement(query2);
+                statement.setLong(1, rsA.getLong("userID"));
+                rsU = statement.executeQuery();
+                rsU.next();
+                list.add(constructAdmin(rsA));
             }
         }
         catch (SQLException e) {
@@ -41,7 +48,8 @@ public class AdminDAO implements DAO<Admin> {
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsA);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -223,4 +231,47 @@ public class AdminDAO implements DAO<Admin> {
             ConnectionFactory.close(dbConnection);
         }
     }
+
+    @Override
+    public List<Admin> findAllByAge(int age) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByCountry(String country) {
+        return null;
+    }
+
+    @Override
+    public Admin findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByChannel(String channel) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByGenre(String genre) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByStartHour(int startHour) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByUserID(Long userID) {
+        return null;
+    }
+
+    @Override
+    public List<Admin> findAllByVideoID(Long videoID) {
+        return null;
+    }
+
+    @Override
+    public void deleteUserHistory(Long userID) {}
 }

@@ -32,4 +32,26 @@ public interface DAO<T> {
      * @param id - delete criteria
      */
     void delete(Long id);
+
+    T findByID(Long id);
+
+    T findByEmail(String email);
+
+    List<T> findAllByAge(int age);
+
+    List<T> findAllByCountry(String country);
+
+    T findByName(String name);
+
+    List<T> findAllByChannel(String channel);
+
+    List<T> findAllByGenre(String genre);
+
+    List<T> findAllByStartHour(int startHour);
+
+    List<T> findAllByUserID(Long userID);
+
+    List<T> findAllByVideoID(Long videoID);
+
+    void deleteUserHistory(Long userID);
 }

@@ -1,6 +1,6 @@
 package com.example.demo.Service;
 
-import com.example.demo.DAO.VideoDAO;
+import com.example.demo.DAO.DAO;
 import com.example.demo.Model.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Service
 public class VideoService {
-    private VideoDAO dao;
+    private DAO<Video> dao;
 
     @Autowired
-    public VideoService(VideoDAO dao)
+    public VideoService(DAO<Video> dao)
     {
         this.dao = dao;
     }
