@@ -37,3 +37,68 @@ Tabela History conține istoricul tuturor utilizatorilor. Aceasta are două Fore
 
 ## Endpoints
 
+#### GET
+Admin
+- /getAdmins - returnează o listă cu toți administratorii
+- /getAdminByID/{id} - returnează un administrator după id-ul specificat
+- /getAdminByEmail/{email} - returnează un administrator după emailul specificat
+
+Client
+- /getClients - returnează o listă cu toți clienții
+- /getClientByID/{id} - returnează un client după id-ul specificat
+- /getClientByEmail/{email} - returnează un client după emailul specificat
+- /getClientsByAge/{age} - returnează o listă cu toți clienții care au vârsta specificată
+- /getClientsByCountry/{country} - returnează o listă cu toți clienții din țara specificată
+
+History
+- /getHistory - returnează o listă cu întregul istoric ("global")
+- /allVideosWatchedByThisUser/{userID} - returnează o listă cu întregul istoric al utilizatorului cu id-ul specificat
+- /allUsersWatchingThisVideo/{videoID} - returnează o listă cu toți utilizatorii care au vizionat videoclipul cu id-ul specificat
+
+Video
+- /getVideos - returnează o listă cu toate videoclipurile
+- /getVideoByName/{name} - returnează un video după numele specificat
+- /getVideosByChannel/{channel} - returnează o listă cu toate videoclipurile care provin de la un canal specificat
+- /getVideosByGenre/{genre} - returnează o listă cu toate videoclipurile care sunt de genul specificat
+- /getVideosByHour/{startHour} - returnează o listă cu toate videoclipurile care încep la ora specificată
+
+#### POST
+Admin
+- /addAdmin - adaugă un administrator în baza de date
+
+Client
+- /addClient - adaugă un client în baza de date
+
+History
+- /addHistory - adaugă un videoclip în istoricul unui utilizator
+
+Video
+- /addVideo - adaugă un video în baza de date
+
+#### PUT
+Admin
+- /updateAdmin - cu informațiile nou primite, actualizează un administrator unde coincide id-ul
+
+Client
+- /updateClient - cu informațiile nou primite, actualizează un client unde coincide id-ul
+
+History
+- /updateHistory - schimbă informațiile unei instanțe de istoric
+
+Video
+- /updateVideos - cu informațiile nou primite, actualizează un video unde coincide id-ul
+
+#### DELETE
+Admin
+- /deleteAdmin/{id} - șterge un administrator din baza de date cu id-ul specificat
+
+Client
+- /deleteClient/{id} - șterge un client din baza de date cu id-ul specificat
+
+History
+- /deleteHistoryByID/{id} - șterge o instanță de istoric din baza de date cu id-ul specificat
+- /deleteUserHistory/{userID} - șterge întreg istoricul al unui utilizator cu id-ul specificat
+
+Video
+- /deleteVideoByID/{id} - șterge un video din baza de date cu id-ul specificat
+- /deleteVideoByName/{name} - șterge un video din baza de date cu numele specificat
