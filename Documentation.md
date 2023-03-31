@@ -34,3 +34,6 @@ Tabela Admin va avea un Foreign Key către tabela User, deoarece un Administrato
 Tabela Video reține toate datele despre un videoclip: nume, canal, tip videoclip, dacă conținutul său este restrâns unui anumit segment de vârstă, link-ul, ora la care începe să fie disponibil, ora la care devine indisponibil și statusul său.
 
 Tabela History conține istoricul tuturor utilizatorilor. Aceasta are două Foreign Keys, id-ul unui utilizator și id-ul unui video. Aceasta va simboliza că utilizatorul (administrator sau client) cu id-ul userID a vizionat videoclipul cu id-ul videoID.
+
+## Endpoints
+
