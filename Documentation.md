@@ -37,7 +37,7 @@ Tabela History conține istoricul tuturor utilizatorilor. Aceasta are două Fore
 
 ## Endpoints
 
-#### GET
+### GET
 Admin
 - /getAdmins - returnează o listă cu toți administratorii
 - /getAdminByID/{id} - returnează un administrator după id-ul specificat
@@ -62,7 +62,7 @@ Video
 - /getVideosByGenre/{genre} - returnează o listă cu toate videoclipurile care sunt de genul specificat
 - /getVideosByHour/{startHour} - returnează o listă cu toate videoclipurile care încep la ora specificată
 
-#### POST
+### POST
 Admin
 - /addAdmin - adaugă un administrator în baza de date
 
@@ -75,7 +75,7 @@ History
 Video
 - /addVideo - adaugă un video în baza de date
 
-#### PUT
+### PUT
 Admin
 - /updateAdmin - cu informațiile nou primite, actualizează un administrator unde coincide id-ul
 
@@ -88,7 +88,7 @@ History
 Video
 - /updateVideos - cu informațiile nou primite, actualizează un video unde coincide id-ul
 
-#### DELETE
+### DELETE
 Admin
 - /deleteAdmin/{id} - șterge un administrator din baza de date cu id-ul specificat
 
