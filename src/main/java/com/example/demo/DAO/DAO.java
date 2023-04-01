@@ -1,7 +1,5 @@
 package com.example.demo.DAO;
 
-import org.springframework.context.annotation.Bean;
-
 import java.util.List;
 
 /**

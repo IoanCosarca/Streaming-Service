@@ -177,21 +177,6 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
-    @Override
-    public List<Video> findAllByUserID(Long userID) {
-        return null;
-    }
-
-    @Override
-    public List<Video> findAllByVideoID(Long videoID) {
-        return null;
-    }
-
-    @Override
-    public void deleteUserHistory(Long userID) {
-
-    }
-
     /**
      * Give a result set entry from a query, constructs a Video object with the fields and returns it.
      * @param rs - result set containing the fields from the table
@@ -328,4 +313,17 @@ public class VideoDAO implements DAO<Video> {
     public List<Video> findAllByCountry(String country) {
         return null;
     }
+
+    @Override
+    public List<Video> findAllByUserID(Long userID) {
+        return null;
+    }
+
+    @Override
+    public List<Video> findAllByVideoID(Long videoID) {
+        return null;
+    }
+
+    @Override
+    public void deleteUserHistory(Long userID) {}
 }
