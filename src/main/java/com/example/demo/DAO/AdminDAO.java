@@ -125,7 +125,6 @@ public class AdminDAO implements DAO<Admin> {
     private Admin constructAdmin(ResultSet rs) throws SQLException
     {
         Admin admin = new Admin();
-        admin.setId(rs.getLong("id"));
         admin.setUserID(rs.getLong("userID"));
         return admin;
     }
@@ -139,14 +138,13 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO admin (id, userID) VALUES (?, ?)";
+        String query1 = "INSERT INTO admin (userID) VALUES (?)";
         String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         try
         {
             // Insert in the Admin Table
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, admin.getId());
-            statement.setLong(2, admin.getUserID());
+            statement.setLong(1, admin.getUserID());
             statement.executeUpdate();
             // Insert in the User Table
             statement = dbConnection.prepareStatement(query2);

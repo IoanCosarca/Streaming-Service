@@ -102,3 +102,9 @@ History
 Video
 - /deleteVideoByID/{id} - șterge un video din baza de date cu id-ul specificat
 - /deleteVideoByName/{name} - șterge un video din baza de date cu numele specificat
+
+## Observer Pattern
+
+Această metodă de proiectare este utilă pentru a ilustra relația dintre Clienți și Videoclipuri.
+
+Un Client trebuie să observe starea unui Videoclip pentru a i se permite apoi să îl acceseze sau nu. Dacă un videoclip nu este disponibil dintr-un anumit motiv, nimeni nu îl poate vedea și clienții vor fi anunțați. De asemenea, când un videoclip devine disponibil, toți clienții vor fi notificați.

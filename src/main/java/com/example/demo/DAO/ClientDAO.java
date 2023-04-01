@@ -222,7 +222,6 @@ public class ClientDAO implements DAO<Client> {
     private Client constructClient(ResultSet rsC, ResultSet rsU) throws SQLException
     {
         Client client = new Client();
-        client.setId(rsC.getLong("id"));
         client.setUserID(rsC.getLong("userID"));
         client.setType(rsU.getString("type"));
         client.setFirstName(rsU.getString("firstName"));
@@ -244,7 +243,7 @@ public class ClientDAO implements DAO<Client> {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         String query1 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        String query2 = "INSERT INTO client (id, userID, age, country) VALUES (?, ?, ?, ?)";
+        String query2 = "INSERT INTO client (userID, age, country) VALUES (?, ?, ?)";
         try
         {
             // Insert in the User Table
@@ -258,10 +257,9 @@ public class ClientDAO implements DAO<Client> {
             statement.executeUpdate();
             // Insert in the Client Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setLong(1, client.getId());
-            statement.setLong(2, client.getUserID());
-            statement.setInt(3, client.getAge());
-            statement.setString(4, client.getCountry());
+            statement.setLong(1, client.getUserID());
+            statement.setInt(2, client.getAge());
+            statement.setString(3, client.getCountry());
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -283,7 +281,7 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "UPDATE client SET age = ?, country = ? WHERE id = " + client.getId();
+        String query1 = "UPDATE client SET age = ?, country = ? WHERE userID = " + client.getUserID();
         String query2 = "UPDATE user SET type = ?, firstName = ?, lastName = ?, email = ?, password = ?";
         query2 += " WHERE userID = " + client.getUserID();
         try

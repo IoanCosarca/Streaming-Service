@@ -1,25 +1,28 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that is mapped with the database table with the same name.
  */
-public class Video {
+public class Video implements Subject {
     private Long id;
     private String name;
+
     private String channel;
     private String genre;
     private boolean ageRestriction;
     private String link;
     private int startHour;
     private int endHour;
-    private String status;
+    private String status = "";
 
-    public Video() {
-    }
+    private List<Client> viewers = new ArrayList<>();
 
-    public Video(Long id, String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour, String status)
+    public Video() {}
+
+    public Video(Long id, String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
     {
         this.id = id;
         this.name = name;
@@ -29,10 +32,9 @@ public class Video {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
-        this.status = status;
     }
 
-    public Video(String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour, String status)
+    public Video(String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
     {
         this.name = name;
         this.channel = channel;
@@ -41,7 +43,6 @@ public class Video {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
-        this.status = status;
     }
 
     public Long getId() {
@@ -129,5 +130,69 @@ public class Video {
                 ", endHour=" + endHour +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    /**
+     * Adds a client observer to the viewers list
+     * @param client - the observer to be added and notified
+     */
+    public void addClient(Client client) {
+        viewers.add(client);
+    }
+
+    /**
+     * Adds a list of client observers to the viewers list
+     * @param clients - all the current observers
+     */
+    public void addClients(List<Client> clients) {
+        viewers.addAll(clients);
+    }
+
+    /**
+     * Removes a client observer from the viewers list
+     * @param client - observer to be removed
+     */
+    public void removeClient(Client client) {
+        viewers.remove(client);
+    }
+
+    /**
+     * Once a certain change happened to the video, notify all Clients
+     */
+    public void notifyViewers()
+    {
+        for (Client client : viewers) {
+            client.update(this.name, this.status);
+        }
+    }
+
+    /**
+     * If a video was accessed, set the status to BUSY and notify the others.
+     */
+    @Override
+    public void onAccess()
+    {
+        this.status = "BUSY";
+        notifyViewers();
+    }
+
+    /**
+     * If the video status has changed (not BUSY or UNAVAILABLE), set the status to AVAILABLE and notify the others.
+     */
+    @Override
+    public void onChange()
+    {
+        this.status = "AVAILABLE";
+        notifyViewers();
+    }
+
+    /**
+     * If it is past the end hour of a video, set the status to UNAVAILABLE and notify the others.
+     */
+    @Override
+    public void onEndHour()
+    {
+        this.status = "UNAVAILABLE";
+        notifyViewers();
     }
 }
