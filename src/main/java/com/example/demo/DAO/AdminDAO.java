@@ -58,7 +58,7 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given id and returns it.
-     * @param id - selection criteria
+     * @param id selection criteria
      * @return Admin
      */
     public Admin findByID(Long id)
@@ -88,7 +88,7 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given email and returns it.
-     * @param email - selection criteria
+     * @param email selection criteria
      * @return Admin
      */
     public Admin findByEmail(String email)
@@ -118,9 +118,9 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Give a result set entry from a query, constructs an Admin object with the fields and returns it.
-     * @param rs - result set containing the fields from the table
+     * @param rs result set containing the fields from the table
      * @return Admin
-     * @throws SQLException - the SQL exception will be handled where the method is called
+     * @throws SQLException the SQL exception will be handled where the method is called
      */
     private Admin constructAdmin(ResultSet rs) throws SQLException
     {
@@ -131,7 +131,7 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection and calls a query to insert the received Admin object into the database.
-     * @param admin - the new Admin table entry
+     * @param admin the new Admin table entry
      */
     @Override
     public void save(Admin admin)
@@ -168,7 +168,7 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection and calls a query to update the database with the Admin object.
-     * @param admin - object containing the new information for the Admin with the same id
+     * @param admin object containing the new information for the Admin with the same id
      */
     @Override
     public void update(Admin admin)
@@ -199,7 +199,7 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     @Override
     public void delete(Long id)

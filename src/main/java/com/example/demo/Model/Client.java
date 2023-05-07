@@ -56,8 +56,8 @@ public class Client extends User implements Observer {
 
     /**
      * Notifies the client about a video's status.
-     * @param name - name of the video
-     * @param status - status of the video
+     * @param name name of the video
+     * @param status status of the video
      */
     @Override
     public void update(String name, String status) {
@@ -66,7 +66,7 @@ public class Client extends User implements Observer {
 
     /**
      * Tries to assign a video to the client.
-     * @param video - video that the client will try to watch
+     * @param video video that the client will try to watch
      */
     @Override
     public void watch(Video video)
@@ -83,7 +83,7 @@ public class Client extends User implements Observer {
 
     /**
      * Rejects a video from being assigned to the client.
-     * @param videoName - name of the video
+     * @param videoName name of the video
      */
     public void denied(String videoName) {
         System.out.println("Sorry " + getFirstName() + ", you can't watch the video " + videoName);
@@ -91,7 +91,7 @@ public class Client extends User implements Observer {
 
     /**
      * Client ends or stops watching a video, making it free for others.
-     * @param video - the video that the client is not watching anymore
+     * @param video the video that the client is not watching anymore
      */
     @Override
     public void stopWatching(Video video)

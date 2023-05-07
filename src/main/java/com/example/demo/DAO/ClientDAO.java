@@ -58,7 +58,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given id and returns it.
-     * @param id - selection criteria
+     * @param id selection criteria
      * @return Client
      */
     public Client findByID(Long id)
@@ -95,7 +95,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given email and returns it.
-     * @param email - selection criteria
+     * @param email selection criteria
      * @return Client
      */
     public Client findByEmail(String email)
@@ -132,7 +132,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection, calls a query to get all the Clients in the database who have a specified age and returns them as list.
-     * @param age - selection criteria
+     * @param age selection criteria
      * @return List[Client]
      */
     public List<Client> findAllByAge(int age)
@@ -173,7 +173,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection, calls a query to get all the Clients in the database from a specified country and returns them as list.
-     * @param country - selection criteria
+     * @param country selection criteria
      * @return List[Client]
      */
     public List<Client> findAllByCountry(String country)
@@ -214,10 +214,10 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Give a result set entry from a query, constructs a Client object with the fields and returns it.
-     * @param rsC - result set containing the fields from the Client table
-     * @param rsU - result set containing the fields from the User table
+     * @param rsC result set containing the fields from the Client table
+     * @param rsU result set containing the fields from the User table
      * @return Client
-     * @throws SQLException - the SQL exception will be handled where the method is called
+     * @throws SQLException the SQL exception will be handled where the method is called
      */
     private Client constructClient(ResultSet rsC, ResultSet rsU) throws SQLException
     {
@@ -235,7 +235,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection and calls a query to insert the received Client object into the database.
-     * @param client - the new Client table entry
+     * @param client the new Client table entry
      */
     @Override
     public void save(Client client)
@@ -274,7 +274,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection and calls a query to update the database with the Client object.
-     * @param client - object containing the new information for the Client with the same id
+     * @param client object containing the new information for the Client with the same id
      */
     @Override
     public void update(Client client)
@@ -312,7 +312,7 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     @Override
     public void delete(Long id)

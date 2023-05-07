@@ -31,7 +31,7 @@ public class VideoController {
 
     /**
      * Returns the Video with the specified name
-     * @param name - search criteria
+     * @param name search criteria
      * @return Video
      */
     @GetMapping("/getVideoByName/{name}")
@@ -41,7 +41,7 @@ public class VideoController {
 
     /**
      * Returns all the Videos that were posted by a certain channel.
-     * @param channel - search criteria
+     * @param channel search criteria
      * @return List[Video]
      */
     @GetMapping("/getVideosByChannel/{channel}")
@@ -51,7 +51,7 @@ public class VideoController {
 
     /**
      * Returns all the Videos that are of a specified genre.
-     * @param genre - search criteria
+     * @param genre search criteria
      * @return List[Video]
      */
     @GetMapping("/getVideosByGenre/{genre}")
@@ -61,7 +61,7 @@ public class VideoController {
 
     /**
      * Returns all the Videos that start at a certain hour.
-     * @param startHour - search criteria
+     * @param startHour search criteria
      * @return List[Video]
      */
     @GetMapping("/getVideosByHour/{startHour}")
@@ -71,7 +71,7 @@ public class VideoController {
 
     /**
      * Adds a new Video to the database.
-     * @param video - the new instance to be added in the table
+     * @param video the new instance to be added in the table
      */
     @PostMapping("/addVideo")
     public void addVideo(@RequestBody Video video) {
@@ -81,7 +81,7 @@ public class VideoController {
 
     /**
      * Updates the details of a Video in the database.
-     * @param video - the instance containing all the modified values to be added in the database
+     * @param video the instance containing all the modified values to be added in the database
      */
     @PutMapping("/updateVideos")
     public void updateVideos(@RequestBody Video video) {
@@ -90,7 +90,7 @@ public class VideoController {
 
     /**
      * Deletes the Video with the specified id.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     @DeleteMapping("/deleteVideoByID/{id}")
     public void deleteVideoByID(@PathVariable Long id) {
@@ -99,7 +99,7 @@ public class VideoController {
 
     /**
      * Deletes the Video with the specified name.
-     * @param name - delete criteria
+     * @param name delete criteria
      */
     @DeleteMapping("/deleteVideoByName/{name}")
     public void deleteVideoByName(@PathVariable String name) {

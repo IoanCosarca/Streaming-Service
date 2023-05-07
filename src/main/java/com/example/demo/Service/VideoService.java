@@ -30,7 +30,7 @@ public class VideoService {
 
     /**
      * Sends the request to get the Video with the specified name.
-     * @param name - search criteria
+     * @param name search criteria
      * @return Video
      */
     public Video getVideoByName(String name) {
@@ -39,7 +39,7 @@ public class VideoService {
 
     /**
      * Sends the request to get all the Videos posted by a specified channel.
-     * @param channel - search criteria
+     * @param channel search criteria
      * @return List[Video]
      */
     public List<Video> getVideosByChannel(String channel) {
@@ -48,7 +48,7 @@ public class VideoService {
 
     /**
      * Sends the request to get all the Videos of a specified genre.
-     * @param genre - search criteria
+     * @param genre search criteria
      * @return List[Video]
      */
     public List<Video> getVideosByGenre(String genre) {
@@ -57,7 +57,7 @@ public class VideoService {
 
     /**
      * Sends the request to get all the Videos that start at a specified hour.
-     * @param startHour - search criteria
+     * @param startHour search criteria
      * @return List[Video]
      */
     public List<Video> getVideosByStartHour(int startHour) {
@@ -66,7 +66,7 @@ public class VideoService {
 
     /**
      * Sends the Video to be added to the database.
-     * @param video - the entry to be added
+     * @param video the entry to be added
      */
     public void saveVideo(Video video) {
         dao.save(video);
@@ -74,7 +74,7 @@ public class VideoService {
 
     /**
      * Sends the new Video object to update the database.
-     * @param video - the entry containing the new information
+     * @param video the entry containing the new information
      */
     public void updateVideos(Video video) {
         dao.update(video);
@@ -82,7 +82,7 @@ public class VideoService {
 
     /**
      * Sends the id of the Video to be deleted from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     public void deleteVideoByID(Long id) {
         dao.delete(id);
@@ -90,7 +90,7 @@ public class VideoService {
 
     /**
      * Given a name, sends the id of the Video who has that name to the database to be deleted.
-     * @param name - the name of the video to be deleted
+     * @param name the name of the video to be deleted
      */
     public void deleteVideoByName(String name)
     {

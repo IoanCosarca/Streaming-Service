@@ -31,7 +31,7 @@ public class HistoryController {
 
     /**
      * Returns a list representing a User's watch history.
-     * @param userID - id of the user whose history must be shown
+     * @param userID id of the user whose history must be shown
      * @return List[History]
      */
     @GetMapping("/allVideosWatchedByThisUser/{userID}")
@@ -41,7 +41,7 @@ public class HistoryController {
 
     /**
      * Returns a list representing all the Users that have watched a certain Video.
-     * @param videoID - id of the video whose watched frequency must be shown
+     * @param videoID id of the video whose watched frequency must be shown
      * @return List[History]
      */
     @GetMapping("/allUsersWatchingThisVideo/{videoID}")
@@ -51,7 +51,7 @@ public class HistoryController {
 
     /**
      * Adds a new entry in the History table.
-     * @param history - the entry to be added
+     * @param history the entry to be added
      */
     @PostMapping("/addHistory")
     public void addHistory(@RequestBody History history) {
@@ -59,7 +59,8 @@ public class HistoryController {
     }
 
     /**
-     * @param history
+     * Updates the details of a History entry in the database.
+     * @param history the instance containing all the modified values to be added in the database
      */
     @PutMapping("/updateHistory")
     public void updateHistory(@RequestBody History history) {
@@ -68,7 +69,7 @@ public class HistoryController {
 
     /**
      * Deletes the entry in the History table with the specified id.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     @DeleteMapping("/deleteHistoryByID/{id}")
     public void deleteHistoryByID(@PathVariable Long id) {
@@ -77,7 +78,7 @@ public class HistoryController {
 
     /**
      * Deletes the entire history of a specified user.
-     * @param userID - id of the user whose watch history must be deleted
+     * @param userID id of the user whose watch history must be deleted
      */
     @DeleteMapping("/deleteUserHistory/{userID}")
     public void deleteUserHistory(@PathVariable Long userID) {

@@ -1,6 +1,5 @@
 package com.example.demo.Service;
 
-import com.example.demo.DAO.AdminDAO;
 import com.example.demo.DAO.DAO;
 import com.example.demo.Model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class AdminService {
 
     /**
      * Sends the request to get the Admin with the specified id.
-     * @param id - search criteria
+     * @param id search criteria
      * @return Admin
      */
     public Admin getAdminByID(Long id) {
@@ -40,7 +39,7 @@ public class AdminService {
 
     /**
      * Sends the request to get the Admin with the specified id.
-     * @param email - search criteria
+     * @param email search criteria
      * @return Admin
      */
     public Admin getAdminByEmail(String email) {
@@ -49,7 +48,7 @@ public class AdminService {
 
     /**
      * Sends the Admin to be added to the database.
-     * @param admin - the entry to be added
+     * @param admin the entry to be added
      */
     public void saveAdmin(Admin admin) {
         dao.save(admin);
@@ -57,7 +56,7 @@ public class AdminService {
 
     /**
      * Sends the new Admin object to update the database.
-     * @param admin - the entry containing the new information
+     * @param admin the entry containing the new information
      */
     public void updateAdmin(Admin admin) {
         dao.update(admin);
@@ -65,7 +64,7 @@ public class AdminService {
 
     /**
      * Sends the id of the Admin to be deleted from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     public void deleteAdminByID(Long id) {
         dao.delete(id);

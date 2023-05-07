@@ -30,7 +30,7 @@ public class ClientService {
 
     /**
      * Sends the request to get the Client with the specified id.
-     * @param id - search criteria
+     * @param id search criteria
      * @return Client
      */
     public Client getClientByID(Long id) {
@@ -39,7 +39,7 @@ public class ClientService {
 
     /**
      * Sends the request to get the Client with the specified email.
-     * @param email - search criteria
+     * @param email search criteria
      * @return Client
      */
     public Client getClientByEmail(String email) {
@@ -48,7 +48,7 @@ public class ClientService {
 
     /**
      * Sends the request to get all the Clients with the specified age.
-     * @param age - search criteria
+     * @param age search criteria
      * @return List[Client]
      */
     public List<Client> getClientsByAge(int age) {
@@ -57,7 +57,7 @@ public class ClientService {
 
     /**
      * Sends the request to get all the Clients from a specified country.
-     * @param country - search criteria
+     * @param country search criteria
      * @return List[Client]
      */
     public List<Client> getClientsByCountry(String country) {
@@ -66,7 +66,7 @@ public class ClientService {
 
     /**
      * Sends the Client to be added to the database.
-     * @param client - the entry to be added
+     * @param client the entry to be added
      */
     public void saveClient(Client client) {
         dao.save(client);
@@ -74,7 +74,7 @@ public class ClientService {
 
     /**
      * Sends the new Client object to update the database.
-     * @param client - the entry containing the new information
+     * @param client the entry containing the new information
      */
     public void updateClient(Client client) {
         dao.update(client);
@@ -82,7 +82,7 @@ public class ClientService {
 
     /**
      * Sends the id of the Client to be deleted from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     public void deleteByID(Long id) {
         dao.delete(id);

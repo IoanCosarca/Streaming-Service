@@ -48,6 +48,11 @@ public class StreamingServiceApplication {
 		if (h.get(Calendar.HOUR_OF_DAY) >= v2.getEndHour()) {
 			v1.onEndHour();
 		}
+		/*OperatiiDobanda op = new OperatiiDobanda();
+		System.out.println(op.calculDobanda(50));
+		DbOperation repo = new Repo();
+		OperatiiDobanda operations = new OperatiiDobanda(repo);
+		operations.riskCheck();*/
 	}
 
 }

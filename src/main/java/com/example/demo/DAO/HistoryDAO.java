@@ -50,7 +50,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection, calls a query to get all the entries in the database where the userID is the specified one and returns them as list.
-     * @param userID - selection criteria
+     * @param userID selection criteria
      * @return List[History]
      */
     public List<History> findAllByUserID(Long userID)
@@ -83,7 +83,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection, calls a query to get all the entries in the database where the videoID is the specified one and returns them as list.
-     * @param videoID - selection criteria
+     * @param videoID selection criteria
      * @return List[History]
      */
     public List<History> findAllByVideoID(Long videoID)
@@ -116,9 +116,9 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Give a result set entry from a query, constructs a History object with the fields and returns it.
-     * @param rs - result set containing the fields from the table
+     * @param rs result set containing the fields from the table
      * @return History
-     * @throws SQLException - the SQL exception will be handled where the method is called
+     * @throws SQLException the SQL exception will be handled where the method is called
      */
     private History constructHistory(ResultSet rs) throws SQLException
     {
@@ -131,7 +131,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection and calls a query to insert the received History object into the database.
-     * @param history - the new object entry
+     * @param history the new object entry
      */
     @Override
     public void save(History history)
@@ -159,7 +159,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection and calls a query to update the database with the History object.
-     * @param history - object containing the new information for the History entry with the same id
+     * @param history object containing the new information for the History entry with the same id
      */
     @Override
     public void update(History history)
@@ -187,7 +187,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id - delete criteria
+     * @param id delete criteria
      */
     @Override
     public void delete(Long id)
@@ -213,7 +213,7 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection and calls a query to delete the watch history of the user with the specified id from the database.
-     * @param userID - delete criteria
+     * @param userID delete criteria
      */
     public void deleteUserHistory(Long userID)
     {

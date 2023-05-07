@@ -134,7 +134,7 @@ public class Video implements Subject {
 
     /**
      * Adds a client observer to the viewers list
-     * @param client - the observer to be added and notified
+     * @param client the observer to be added and notified
      */
     public void addClient(Client client) {
         viewers.add(client);
@@ -142,7 +142,7 @@ public class Video implements Subject {
 
     /**
      * Adds a list of client observers to the viewers list
-     * @param clients - all the current observers
+     * @param clients all the current observers
      */
     public void addClients(List<Client> clients) {
         viewers.addAll(clients);
@@ -150,7 +150,7 @@ public class Video implements Subject {
 
     /**
      * Removes a client observer from the viewers list
-     * @param client - observer to be removed
+     * @param client observer to be removed
      */
     public void removeClient(Client client) {
         viewers.remove(client);
