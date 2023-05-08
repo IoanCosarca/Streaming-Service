@@ -6,6 +6,9 @@ Această documentație are rolul de a ghida navigarea prin utilizarea aplicație
 - Funcționalitate / Scop
 - Funcționalități Expuse
 - Baza de date
+- Endpoints
+- Observer Pattern
+- Testarea
 
 ## Funcționalitate / Scop
 
@@ -20,6 +23,8 @@ Aplicația trebuie să-i permită unui tip de utilizator să se înregistreze sa
 Un administrator ar trebui să poată gestiona clipurile care sunt încărcate / referențiate în aplicație. El poate viziona un videoclip și poate decide dacă va rămâne sau îl poate da jos / elimina.
 
 Un utilizator ar trebui să poată vedea videoclipurile și să poată selecta unul pentru vizualizare. Un videoclip poate fi vizionat dacă ora curentă corespunde intervalului orar între care este disponibil sau dacă utilizatorul care l-a accesat înainte și-s terminat vizionarea. De asemenea, poate fi vizionat doar dacă în momentul curent nu este deja vizionat de un alt utilizator.
+
+Când un videoclip devine disponibil pentru vizionare, utilizatorii care așteaptă vor fi notificați.
 
 ## Baza de Date
 
@@ -108,3 +113,7 @@ Video
 Această metodă de proiectare este utilă pentru a ilustra relația dintre Clienți și Videoclipuri.
 
 Un Client trebuie să observe starea unui Videoclip pentru a i se permite apoi să îl acceseze sau nu. Dacă un videoclip nu este disponibil dintr-un anumit motiv, nimeni nu îl poate vedea și clienții vor fi anunțați. De asemenea, când un videoclip devine disponibil, toți clienții vor fi notificați.
+
+## Testarea
+
+Pentru testarea funcționalității proiectului s-a folosit JUnit Testing și frameworkul Mokito pentru verificarea că se apelează metodele din clasele care trebuie.
