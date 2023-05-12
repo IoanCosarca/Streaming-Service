@@ -2,6 +2,7 @@ package com.example.demo.DAO;
 
 import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.Admin;
+import com.example.demo.Model.UserType;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class AdminDAO implements DAO<Admin> {
                 statement.setLong(1, rsA.getLong("userID"));
                 rsU = statement.executeQuery();
                 rsU.next();
-                list.add(constructAdmin(rsA));
+                list.add(constructAdmin(rsA, rsU));
             }
         }
         catch (SQLException e) {
@@ -65,22 +66,29 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = "SELECT * FROM admin WHERE id = ?";
+        ResultSet rsA = null;
+        ResultSet rsU = null;
+        String query1 = "SELECT * FROM admin WHERE id = ?";
+        String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setLong(1, id);
-            rs = statement.executeQuery();
-            rs.next();
-            return constructAdmin(rs);
+            rsA = statement.executeQuery();
+            rsA.next();
+            statement = dbConnection.prepareStatement(query2);
+            statement.setLong(1, rsA.getLong("userID"));
+            rsU = statement.executeQuery();
+            rsU.next();
+            return constructAdmin(rsA, rsU);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsA);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -95,22 +103,29 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        ResultSet rs = null;
-        String query = "SELECT * FROM user WHERE email = ?";
+        ResultSet rsA = null;
+        ResultSet rsU = null;
+        String query1 = "SELECT * FROM user WHERE email = ?";
+        String query2 = "SELECT * FROM admin WHERE userID = ?";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
             statement.setString(1, email);
-            rs = statement.executeQuery();
-            rs.next();
-            return constructAdmin(rs);
+            rsU = statement.executeQuery();
+            rsU.next();
+            statement = dbConnection.prepareStatement(query2);
+            statement.setLong(1, rsU.getLong("userID"));
+            rsA = statement.executeQuery();
+            rsA.next();
+            return constructAdmin(rsA, rsU);
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
         finally
         {
-            ConnectionFactory.close(rs);
+            ConnectionFactory.close(rsA);
+            ConnectionFactory.close(rsU);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -118,14 +133,21 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Give a result set entry from a query, constructs an Admin object with the fields and returns it.
-     * @param rs result set containing the fields from the table
+     *
+     * @param rsA result set containing the fields from the Admin table
+     * @param rsU result set containing the fields from the User table
      * @return Admin
      * @throws SQLException the SQL exception will be handled where the method is called
      */
-    private Admin constructAdmin(ResultSet rs) throws SQLException
+    private Admin constructAdmin(ResultSet rsA, ResultSet rsU) throws SQLException
     {
         Admin admin = new Admin();
-        admin.setUserID(rs.getLong("userID"));
+        admin.setUserID(rsA.getLong("userID"));
+        admin.setType(UserType.valueOf(rsU.getString("type")));
+        admin.setFirstName(rsU.getString("firstName"));
+        admin.setLastName(rsU.getString("lastName"));
+        admin.setEmail(rsU.getString("email"));
+        admin.setPassword(rsU.getString("password"));
         return admin;
     }
 
@@ -149,7 +171,7 @@ public class AdminDAO implements DAO<Admin> {
             // Insert in the User Table
             statement = dbConnection.prepareStatement(query2);
             statement.setLong(1, admin.getUserID());
-            statement.setString(2, admin.getType());
+            statement.setString(2, admin.getType().toString());
             statement.setString(3, admin.getFirstName());
             statement.setString(4, admin.getLastName());
             statement.setString(5, admin.getEmail());
@@ -180,7 +202,7 @@ public class AdminDAO implements DAO<Admin> {
         try
         {
             statement = dbConnection.prepareStatement(query);
-            statement.setString(1, admin.getType());
+            statement.setString(1, admin.getType().toString());
             statement.setString(2, admin.getFirstName());
             statement.setString(3, admin.getLastName());
             statement.setString(4, admin.getEmail());

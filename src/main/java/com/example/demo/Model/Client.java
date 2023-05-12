@@ -18,14 +18,14 @@ public class Client extends User implements Observer {
 
     public Client(Long userID, String firstName, String lastName, String email, String password, int age, String country)
     {
-        super(userID, "CLIENT", firstName, lastName, email, password);
+        super(userID, UserType.CLIENT, firstName, lastName, email, password);
         this.age = age;
         this.country = country;
     }
 
     public Client(String firstName, String lastName, String email, String password, int age, String country)
     {
-        super("CLIENT", firstName, lastName, email, password);
+        super(UserType.CLIENT, firstName, lastName, email, password);
         this.age = age;
         this.country = country;
     }
@@ -60,8 +60,11 @@ public class Client extends User implements Observer {
      * @param status status of the video
      */
     @Override
-    public void update(String name, String status) {
-        System.out.println(this.getFirstName() + ", Video " + name + " is now " + status);
+    public void update(String name, VideoStatus status)
+    {
+        if (!this.videoWatching.getName().equals(name)) {
+            System.out.println(this.getFirstName() + ", Video " + name + " is now " + status.toString());
+        }
     }
 
     /**
@@ -71,7 +74,7 @@ public class Client extends User implements Observer {
     @Override
     public void watch(Video video)
     {
-        if (!video.getStatus().equals("BUSY") && !video.getStatus().equals("UNAVAILABLE"))
+        if (video.getStatus() != VideoStatus.BUSY && video.getStatus() != VideoStatus.UNAVAILABLE)
         {
             this.videoWatching = video;
             video.onAccess();

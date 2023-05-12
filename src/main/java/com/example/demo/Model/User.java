@@ -1,13 +1,11 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.*;
-
 /**
  * Class that is mapped with the database table with the same name.
  */
 abstract class User {
     private Long userID;
-    private String type;
+    private UserType type;
     private String firstName;
     private String lastName;
     private String email;
@@ -15,7 +13,7 @@ abstract class User {
 
     public User() {}
 
-    public User(Long userID, String type, String firstName, String lastName, String email, String password)
+    public User(Long userID, UserType type, String firstName, String lastName, String email, String password)
     {
         this.userID = userID;
         this.type = type;
@@ -25,7 +23,7 @@ abstract class User {
         this.password = password;
     }
 
-    public User(String type, String firstName, String lastName, String email, String password)
+    public User(UserType type, String firstName, String lastName, String email, String password)
     {
         this.type = type;
         this.firstName = firstName;
@@ -42,11 +40,11 @@ abstract class User {
         this.userID = userID;
     }
 
-    public String getType() {
+    public UserType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 

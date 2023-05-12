@@ -11,11 +11,11 @@ public class Admin extends User {
 
     public Admin(Long userID, String firstName, String lastName, String email, String password)
     {
-        super(userID, "ADMIN", firstName, lastName, email, password);
+        super(userID, UserType.ADMIN, firstName, lastName, email, password);
     }
 
     public Admin(String firstName, String lastName, String email, String password)
     {
-        super("ADMIN", firstName, lastName, email, password);
+        super(UserType.ADMIN, firstName, lastName, email, password);
     }
 }

@@ -9,7 +9,7 @@ public interface Observer {
      * @param name name of the video
      * @param status status of the video
      */
-    void update(String name, String status);
+    void update(String name, VideoStatus status);
 
     /**
      * Method to describe the behaviour when a client tries to watch a video.

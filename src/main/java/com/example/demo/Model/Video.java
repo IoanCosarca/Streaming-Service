@@ -1,6 +1,7 @@
 package com.example.demo.Model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -9,20 +10,21 @@ import java.util.List;
 public class Video implements Subject {
     private Long id;
     private String name;
-
     private String channel;
-    private String genre;
+    private VideoGenre genre;
     private boolean ageRestriction;
     private String link;
     private int startHour;
     private int endHour;
-    private String status = "";
+    private VideoStatus status;
 
     private List<Client> viewers = new ArrayList<>();
 
-    public Video() {}
+    public Video() {
+        this.name = "";
+    }
 
-    public Video(Long id, String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
+    public Video(Long id, String name, String channel, VideoGenre genre, boolean ageRestriction, String link, int startHour, int endHour)
     {
         this.id = id;
         this.name = name;
@@ -32,9 +34,10 @@ public class Video implements Subject {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
+        this.status = initializeStatus();
     }
 
-    public Video(String name, String channel, String genre, boolean ageRestriction, String link, int startHour, int endHour)
+    public Video(String name, String channel, VideoGenre genre, boolean ageRestriction, String link, int startHour, int endHour)
     {
         this.name = name;
         this.channel = channel;
@@ -43,6 +46,16 @@ public class Video implements Subject {
         this.link = link;
         this.startHour = startHour;
         this.endHour = endHour;
+        this.status = initializeStatus();
+    }
+
+    private VideoStatus initializeStatus()
+    {
+        Calendar h = Calendar.getInstance();
+        if (h.get(Calendar.HOUR_OF_DAY) >= this.startHour && h.get(Calendar.HOUR_OF_DAY) <= this.endHour) {
+            return VideoStatus.AVAILABLE;
+        }
+        return VideoStatus.UNAVAILABLE;
     }
 
     public Long getId() {
@@ -69,11 +82,11 @@ public class Video implements Subject {
         this.channel = channel;
     }
 
-    public String getGenre() {
+    public VideoGenre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(VideoGenre genre) {
         this.genre = genre;
     }
 
@@ -109,11 +122,11 @@ public class Video implements Subject {
         this.endHour = endHour;
     }
 
-    public String getStatus() {
+    public VideoStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(VideoStatus status) {
         this.status = status;
     }
 
@@ -172,7 +185,7 @@ public class Video implements Subject {
     @Override
     public void onAccess()
     {
-        this.status = "BUSY";
+        this.status = VideoStatus.BUSY;
         notifyViewers();
     }
 
@@ -182,7 +195,7 @@ public class Video implements Subject {
     @Override
     public void onChange()
     {
-        this.status = "AVAILABLE";
+        this.status = VideoStatus.AVAILABLE;
         notifyViewers();
     }
 
@@ -192,7 +205,7 @@ public class Video implements Subject {
     @Override
     public void onEndHour()
     {
-        this.status = "UNAVAILABLE";
+        this.status = VideoStatus.UNAVAILABLE;
         notifyViewers();
     }
 }

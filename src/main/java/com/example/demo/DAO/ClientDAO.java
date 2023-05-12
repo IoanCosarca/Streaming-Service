@@ -2,6 +2,7 @@ package com.example.demo.DAO;
 
 import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.Client;
+import com.example.demo.Model.UserType;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -223,7 +224,7 @@ public class ClientDAO implements DAO<Client> {
     {
         Client client = new Client();
         client.setUserID(rsC.getLong("userID"));
-        client.setType(rsU.getString("type"));
+        client.setType(UserType.valueOf(rsU.getString("type")));
         client.setFirstName(rsU.getString("firstName"));
         client.setLastName(rsU.getString("lastName"));
         client.setEmail(rsU.getString("email"));
@@ -249,7 +250,7 @@ public class ClientDAO implements DAO<Client> {
             // Insert in the User Table
             statement = dbConnection.prepareStatement(query1);
             statement.setLong(1, client.getUserID());
-            statement.setString(2, client.getType());
+            statement.setString(2, client.getType().toString());
             statement.setString(3, client.getFirstName());
             statement.setString(4, client.getLastName());
             statement.setString(5, client.getEmail());
@@ -293,7 +294,7 @@ public class ClientDAO implements DAO<Client> {
             statement.executeUpdate();
             // Update in the User Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setString(1, client.getType());
+            statement.setString(1, client.getType().toString());
             statement.setString(2, client.getFirstName());
             statement.setString(3, client.getLastName());
             statement.setString(4, client.getEmail());

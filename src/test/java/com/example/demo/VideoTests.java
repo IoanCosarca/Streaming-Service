@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.DAO.DAO;
 import com.example.demo.Model.Video;
+import com.example.demo.Model.VideoGenre;
 import com.example.demo.Service.VideoService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -101,7 +102,7 @@ public class VideoTests {
     @Test
     void testDeleteByName()
     {
-        Video video = new Video(9L, "", "SHAKIRA || BZRP Music Sessions #53", "Kids", false, "0000", 10, 12);
+        Video video = new Video(9L, "", "SHAKIRA || BZRP Music Sessions #53", VideoGenre.Kids, false, "0000", 10, 12);
         VideoService videoService = new VideoService(dao);
         when (dao.findByName("SHAKIRA || BZRP Music Sessions #53")).thenReturn(video);
         videoService.deleteVideoByName("SHAKIRA || BZRP Music Sessions #53");

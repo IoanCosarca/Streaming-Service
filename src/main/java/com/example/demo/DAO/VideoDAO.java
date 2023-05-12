@@ -2,6 +2,8 @@ package com.example.demo.DAO;
 
 import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.Video;
+import com.example.demo.Model.VideoGenre;
+import com.example.demo.Model.VideoStatus;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -189,12 +191,12 @@ public class VideoDAO implements DAO<Video> {
         video.setId(rs.getLong("id"));
         video.setName(rs.getString("name"));
         video.setChannel(rs.getString("channel"));
-        video.setGenre(rs.getString("genre"));
+        video.setGenre(VideoGenre.valueOf(rs.getString("genre")));
         video.setAgeRestriction(rs.getBoolean("ageRestriction"));
         video.setLink(rs.getString("link"));
         video.setStartHour(rs.getInt("startHour"));
         video.setEndHour(rs.getInt("endHour"));
-        video.setStatus(rs.getString("status"));
+        video.setStatus(VideoStatus.valueOf(rs.getString("status")));
         return video;
     }
 
@@ -215,12 +217,12 @@ public class VideoDAO implements DAO<Video> {
             statement.setLong(1, video.getId());
             statement.setString(2, video.getName());
             statement.setString(3, video.getChannel());
-            statement.setString(4, video.getGenre());
+            statement.setString(4, video.getGenre().toString());
             statement.setBoolean(5, video.isAgeRestriction());
             statement.setString(6, video.getLink());
             statement.setInt(7, video.getStartHour());
             statement.setInt(8, video.getEndHour());
-            statement.setString(9, video.getStatus());
+            statement.setString(9, video.getStatus().toString());
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -250,12 +252,12 @@ public class VideoDAO implements DAO<Video> {
             statement = dbConnection.prepareStatement(query);
             statement.setString(1, video.getName());
             statement.setString(2, video.getChannel());
-            statement.setString(3, video.getGenre());
+            statement.setString(3, video.getGenre().toString());
             statement.setBoolean(4, video.isAgeRestriction());
             statement.setString(5, video.getLink());
             statement.setInt(6, video.getStartHour());
             statement.setInt(7, video.getEndHour());
-            statement.setString(8, video.getStatus());
+            statement.setString(8, video.getStatus().toString());
             statement.executeUpdate();
         }
         catch (SQLException e) {
