@@ -49,10 +49,10 @@ public class Video implements Subject {
         this.status = initializeStatus();
     }
 
-    private VideoStatus initializeStatus()
+    public VideoStatus initializeStatus()
     {
         Calendar h = Calendar.getInstance();
-        if (h.get(Calendar.HOUR_OF_DAY) >= this.startHour && h.get(Calendar.HOUR_OF_DAY) <= this.endHour) {
+        if (h.get(Calendar.HOUR_OF_DAY) + 1 >= this.startHour && h.get(Calendar.HOUR_OF_DAY) + 1 <= this.endHour) {
             return VideoStatus.AVAILABLE;
         }
         return VideoStatus.UNAVAILABLE;

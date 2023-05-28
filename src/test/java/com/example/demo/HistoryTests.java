@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -43,39 +44,15 @@ public class HistoryTests {
     }
 
     @Test
-    void testFindByVideoID()
-    {
-        List<History> histories = new ArrayList<>();
-        HistoryService historyService = new HistoryService(dao);
-        historyService.allUsersWatchingThisVideo(1L);
-        when (dao.findAllByVideoID(1L)).thenReturn(histories);
-        verify(dao).findAllByVideoID(1L);
-    }
-
-    @Test
     void testSave()
     {
-        History history = new History(3L, 5L);
+        Calendar h = Calendar.getInstance();
+        String date = h.get(Calendar.YEAR) + "-" + (h.get(Calendar.MONTH) + 1) + "-" + h.get(Calendar.DAY_OF_MONTH);
+        String time = h.get(Calendar.HOUR_OF_DAY) + ":" + h.get(Calendar.MINUTE) + ":" + h.get(Calendar.SECOND);
+        History history = new History(3L, 5L, date, time);
         HistoryService historyService = new HistoryService(dao);
         historyService.saveHistory(history);
         verify(dao).save(history);
-    }
-
-    @Test
-    void testUpdate()
-    {
-        History history = new History(3L, 5L);
-        HistoryService historyService = new HistoryService(dao);
-        historyService.updateHistory(history);
-        verify(dao).update(history);
-    }
-
-    @Test
-    void testRegDelete()
-    {
-        HistoryService historyService = new HistoryService(dao);
-        historyService.deleteHistoryByID(1L);
-        verify(dao).delete(1L);
     }
 
     @Test
@@ -83,6 +60,6 @@ public class HistoryTests {
     {
         HistoryService historyService = new HistoryService(dao);
         historyService.deleteUserHistory(1L);
-        verify(dao).deleteUserHistory(1L);
+        verify(dao).delete(1L);
     }
 }

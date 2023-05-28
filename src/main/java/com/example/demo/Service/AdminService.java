@@ -30,11 +30,11 @@ public class AdminService {
 
     /**
      * Sends the request to get the Admin with the specified id.
-     * @param id search criteria
+     * @param userID search criteria
      * @return Admin
      */
-    public Admin getAdminByID(Long id) {
-        return dao.findByID(id);
+    public Admin getAdminByID(Long userID) {
+        return dao.findByID(userID);
     }
 
     /**
@@ -64,9 +64,9 @@ public class AdminService {
 
     /**
      * Sends the id of the Admin to be deleted from the database.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
-    public void deleteAdminByID(Long id) {
-        dao.delete(id);
+    public void deleteAdminByID(Long userID) {
+        dao.delete(userID);
     }
 }

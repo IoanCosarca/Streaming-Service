@@ -4,32 +4,20 @@ package com.example.demo.Model;
  * Class that is mapped with the database table with the same name.
  */
 public class History {
-    private Long id;
     private Long userID;
     private Long videoID;
+    private String date;
+    private String time;
 
     public History() {
     }
 
-    public History(Long id, Long userID, Long videoID)
-    {
-        this.id = id;
-        this.userID = userID;
-        this.videoID = videoID;
-    }
-
-    public History(Long userID, Long videoID)
+    public History(Long userID, Long videoID, String date, String time)
     {
         this.userID = userID;
         this.videoID = videoID;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.date = date;
+        this.time = time;
     }
 
     public Long getUserID() {
@@ -46,5 +34,21 @@ public class History {
 
     public void setVideoID(Long videoID) {
         this.videoID = videoID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

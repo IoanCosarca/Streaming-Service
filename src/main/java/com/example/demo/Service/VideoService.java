@@ -29,11 +29,20 @@ public class VideoService {
     }
 
     /**
+     * Sends the request to get the Video with the specified id.
+     * @param id search criteria
+     * @return Client
+     */
+    public Video getVideoByID(Long id) {
+        return dao.findByID(id);
+    }
+
+    /**
      * Sends the request to get the Video with the specified name.
      * @param name search criteria
      * @return Video
      */
-    public Video getVideoByName(String name) {
+    public List<Video> getVideoByName(String name) {
         return dao.findByName(name);
     }
 
@@ -76,7 +85,7 @@ public class VideoService {
      * Sends the new Video object to update the database.
      * @param video the entry containing the new information
      */
-    public void updateVideos(Video video) {
+    public void updateVideo(Video video) {
         dao.update(video);
     }
 
@@ -88,13 +97,4 @@ public class VideoService {
         dao.delete(id);
     }
 
-    /**
-     * Given a name, sends the id of the Video who has that name to the database to be deleted.
-     * @param name the name of the video to be deleted
-     */
-    public void deleteVideoByName(String name)
-    {
-        Video video = dao.findByName(name);
-        dao.delete(video.getId());
-    }
 }

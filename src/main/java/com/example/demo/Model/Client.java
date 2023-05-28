@@ -10,7 +10,7 @@ public class Client extends User implements Observer {
     /**
      * Field telling which video is the client currently watching.
      */
-    private Video videoWatching = new Video();
+    private Video videoWatching;
 
     public Client() {
         super();
@@ -21,6 +21,7 @@ public class Client extends User implements Observer {
         super(userID, UserType.CLIENT, firstName, lastName, email, password);
         this.age = age;
         this.country = country;
+        this.videoWatching = new Video();
     }
 
     public Client(String firstName, String lastName, String email, String password, int age, String country)
@@ -28,6 +29,7 @@ public class Client extends User implements Observer {
         super(UserType.CLIENT, firstName, lastName, email, password);
         this.age = age;
         this.country = country;
+        this.videoWatching = new Video();
     }
 
     public int getAge() {

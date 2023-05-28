@@ -30,11 +30,11 @@ public class ClientService {
 
     /**
      * Sends the request to get the Client with the specified id.
-     * @param id search criteria
+     * @param userID search criteria
      * @return Client
      */
-    public Client getClientByID(Long id) {
-        return dao.findByID(id);
+    public Client getClientByID(Long userID) {
+        return dao.findByID(userID);
     }
 
     /**
@@ -82,9 +82,9 @@ public class ClientService {
 
     /**
      * Sends the id of the Client to be deleted from the database.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
-    public void deleteByID(Long id) {
-        dao.delete(id);
+    public void deleteByID(Long userID) {
+        dao.delete(userID);
     }
 }

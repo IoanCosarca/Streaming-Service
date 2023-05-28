@@ -39,7 +39,7 @@ public interface DAO<T> {
 
     List<T> findAllByCountry(String country);
 
-    T findByName(String name);
+    List<T> findByName(String name);
 
     List<T> findAllByChannel(String channel);
 
@@ -49,7 +49,4 @@ public interface DAO<T> {
 
     List<T> findAllByUserID(Long userID);
 
-    List<T> findAllByVideoID(Long videoID);
-
-    void deleteUserHistory(Long userID);
 }

@@ -59,25 +59,28 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given id and returns it.
-     * @param id selection criteria
+     * @param userID selection criteria
      * @return Admin
      */
-    public Admin findByID(Long id)
+    public Admin findByID(Long userID)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rsA = null;
         ResultSet rsU = null;
-        String query1 = "SELECT * FROM admin WHERE id = ?";
+        String query1 = "SELECT * FROM admin WHERE userID = ?";
         String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, id);
+            statement.setLong(1, userID);
             rsA = statement.executeQuery();
+            if (!rsA.isBeforeFirst()) {
+                return null;
+            }
             rsA.next();
             statement = dbConnection.prepareStatement(query2);
-            statement.setLong(1, rsA.getLong("userID"));
+            statement.setLong(1, userID);
             rsU = statement.executeQuery();
             rsU.next();
             return constructAdmin(rsA, rsU);
@@ -132,7 +135,7 @@ public class AdminDAO implements DAO<Admin> {
     }
 
     /**
-     * Give a result set entry from a query, constructs an Admin object with the fields and returns it.
+     * Given a result set entry from a query, constructs an Admin object with the fields and returns it.
      *
      * @param rsA result set containing the fields from the Admin table
      * @param rsU result set containing the fields from the User table
@@ -160,16 +163,22 @@ public class AdminDAO implements DAO<Admin> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO admin (userID) VALUES (?)";
-        String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        ResultSet rs = null;
+        String query1 = "SELECT MAX(userID) FROM user";
+        String query2 = "INSERT INTO admin (userID) VALUES (?)";
+        String query3 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
         try
         {
-            // Insert in the Admin Table
             statement = dbConnection.prepareStatement(query1);
+            rs = statement.executeQuery();
+            rs.next();
+            admin.setUserID(rs.getLong("MAX(userID)") + 1);
+            // Insert in the Admin Table
+            statement = dbConnection.prepareStatement(query2);
             statement.setLong(1, admin.getUserID());
             statement.executeUpdate();
             // Insert in the User Table
-            statement = dbConnection.prepareStatement(query2);
+            statement = dbConnection.prepareStatement(query3);
             statement.setLong(1, admin.getUserID());
             statement.setString(2, admin.getType().toString());
             statement.setString(3, admin.getFirstName());
@@ -183,6 +192,7 @@ public class AdminDAO implements DAO<Admin> {
         }
         finally
         {
+            ConnectionFactory.close(rs);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -221,25 +231,25 @@ public class AdminDAO implements DAO<Admin> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
     @Override
-    public void delete(Long id)
+    public void delete(Long userID)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "DELETE FROM admin WHERE id = ?";
+        String query1 = "DELETE FROM admin WHERE userID = ?";
         String query2 = "DELETE FROM user WHERE userID = ?";
         try
         {
-            Admin admin = findByID(id);
+            Admin admin = findByID(userID);
             // Delete in the Admin Table
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, id);
+            statement.setLong(1, userID);
             statement.execute();
             // Delete in the User Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setLong(1, admin.getUserID());
+            statement.setLong(1, userID);
             statement.execute();
         }
         catch (SQLException e) {
@@ -263,7 +273,7 @@ public class AdminDAO implements DAO<Admin> {
     }
 
     @Override
-    public Admin findByName(String name) {
+    public List<Admin> findByName(String name) {
         return null;
     }
 
@@ -287,11 +297,4 @@ public class AdminDAO implements DAO<Admin> {
         return null;
     }
 
-    @Override
-    public List<Admin> findAllByVideoID(Long videoID) {
-        return null;
-    }
-
-    @Override
-    public void deleteUserHistory(Long userID) {}
 }

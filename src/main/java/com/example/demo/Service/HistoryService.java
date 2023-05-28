@@ -38,15 +38,6 @@ public class HistoryService {
     }
 
     /**
-     * Sends a request to get all the entries of a video with a specified id.
-     * @param videoID the id of the video whose watched frequency must be shown
-     * @return List[History]
-     */
-    public List<History> allUsersWatchingThisVideo(Long videoID) {
-        return dao.findAllByVideoID(videoID);
-    }
-
-    /**
      * Sends the new History entry to be added to the database.
      * @param history the entry to be added
      */
@@ -55,26 +46,10 @@ public class HistoryService {
     }
 
     /**
-     * Sends the new History object to update the database.
-     * @param history the entry containing the new information
-     */
-    public void updateHistory(History history) {
-        dao.update(history);
-    }
-
-    /**
-     * Sends the id of the History entry to be deleted from the database.
-     * @param id delete criteria
-     */
-    public void deleteHistoryByID(Long id) {
-        dao.delete(id);
-    }
-
-    /**
      * Sends the id of the user whose watch history must be deleted.
      * @param userID delete criteria
      */
     public void deleteUserHistory(Long userID) {
-        dao.deleteUserHistory(userID);
+        dao.delete(userID);
     }
 }

@@ -17,7 +17,7 @@ public class StreamingServiceApplication {
 		SpringApplication.run(StreamingServiceApplication.class, args);
 
 		Calendar h = Calendar.getInstance();
-		Video v1 = new Video("Observer Design Pattern in Java", "Telusko", VideoGenre.Tutorial, false, "98DiwRp-KZk", 15, 19);
+		Video v1 = new Video("Observer Design Pattern in Java", "Telusko", VideoGenre.Tutorials, false, "98DiwRp-KZk", 15, 19);
 		Video v2 = new Video("Place Holder", "Chanchan", VideoGenre.Comedy, true, "yavjksbj", 18, 20);
 
 		Client c1 = new Client("John", "Doe", "abc@gmail.com", "1234556", 25, "USA");

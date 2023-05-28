@@ -11,6 +11,7 @@ import java.util.List;
  * The class that controls the operations on the Client table, not how they are implemented.
  */
 @RestController
+@RequestMapping(path = "api")
 public class ClientController {
     private ClientService clientService;
 
@@ -31,12 +32,12 @@ public class ClientController {
 
     /**
      * Returns the Client with the specified id.
-     * @param id search criteria
+     * @param userID search criteria
      * @return Client
      */
-    @GetMapping("/getClientByID/{id}")
-    public Client getClientByID(@PathVariable Long id) {
-        return clientService.getClientByID(id);
+    @GetMapping("/getClientByID/{userID}")
+    public Client getClientByID(@PathVariable Long userID) {
+        return clientService.getClientByID(userID);
     }
 
     /**
@@ -89,10 +90,10 @@ public class ClientController {
 
     /**
      * Deletes the Client with the specified id.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
-    @DeleteMapping("/deleteClient/{id}")
-    public void deleteClient(@PathVariable Long id) {
-        clientService.deleteByID(id);
+    @DeleteMapping("/deleteClient/{userID}")
+    public void deleteClient(@PathVariable Long userID) {
+        clientService.deleteByID(userID);
     }
 }

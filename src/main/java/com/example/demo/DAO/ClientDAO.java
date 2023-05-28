@@ -59,25 +59,28 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection, calls a query to get the object from the database with the given id and returns it.
-     * @param id selection criteria
+     * @param userID selection criteria
      * @return Client
      */
-    public Client findByID(Long id)
+    public Client findByID(Long userID)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rsC = null;
         ResultSet rsU = null;
-        String query1 = "SELECT * FROM client WHERE id = ?";
+        String query1 = "SELECT * FROM client WHERE userID = ?";
         String query2 = "SELECT * FROM user WHERE userID = ?";
         try
         {
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, id);
+            statement.setLong(1, userID);
             rsC = statement.executeQuery();
+            if (!rsC.isBeforeFirst()) {
+                return null;
+            }
             rsC.next();
             statement = dbConnection.prepareStatement(query2);
-            statement.setLong(1, rsC.getLong("userID"));
+            statement.setLong(1, userID);
             rsU = statement.executeQuery();
             rsU.next();
             return constructClient(rsC, rsU);
@@ -214,7 +217,7 @@ public class ClientDAO implements DAO<Client> {
     }
 
     /**
-     * Give a result set entry from a query, constructs a Client object with the fields and returns it.
+     * Given a result set entry from a query, constructs a Client object with the fields and returns it.
      * @param rsC result set containing the fields from the Client table
      * @param rsU result set containing the fields from the User table
      * @return Client
@@ -243,31 +246,38 @@ public class ClientDAO implements DAO<Client> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
-        String query2 = "INSERT INTO client (userID, age, country) VALUES (?, ?, ?)";
+        ResultSet rs = null;
+        String query1 = "SELECT MAX(userID) FROM user";
+        String query2 = "INSERT INTO user (userID, type, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String query3 = "INSERT INTO client (userID, age, country) VALUES (?, ?, ?)";
         try
         {
-            // Insert in the User Table
             statement = dbConnection.prepareStatement(query1);
+            rs = statement.executeQuery();
+            rs.next();
+            client.setUserID(rs.getLong("MAX(userID)") + 1);
+            // Insert in the User Table
+            statement = dbConnection.prepareStatement(query2);
             statement.setLong(1, client.getUserID());
             statement.setString(2, client.getType().toString());
             statement.setString(3, client.getFirstName());
             statement.setString(4, client.getLastName());
             statement.setString(5, client.getEmail());
             statement.setString(6, client.getPassword());
-            statement.executeUpdate();
+            statement.execute();
             // Insert in the Client Table
-            statement = dbConnection.prepareStatement(query2);
+            statement = dbConnection.prepareStatement(query3);
             statement.setLong(1, client.getUserID());
             statement.setInt(2, client.getAge());
             statement.setString(3, client.getCountry());
-            statement.executeUpdate();
+            statement.execute();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
         finally
         {
+            ConnectionFactory.close(rs);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -313,25 +323,25 @@ public class ClientDAO implements DAO<Client> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
     @Override
-    public void delete(Long id)
+    public void delete(Long userID)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query1 = "DELETE FROM client WHERE id = ?";
+        String query1 = "DELETE FROM client WHERE userID = ?";
         String query2 = "DELETE FROM user WHERE userID = ?";
         try
         {
-            Client client = findByID(id);
+            Client client = findByID(userID);
             // Delete in the Client Table
             statement = dbConnection.prepareStatement(query1);
-            statement.setLong(1, id);
+            statement.setLong(1, userID);
             statement.execute();
             // Delete in the User Table
             statement = dbConnection.prepareStatement(query2);
-            statement.setLong(1, client.getUserID());
+            statement.setLong(1, userID);
             statement.execute();
         }
         catch (SQLException e) {
@@ -345,7 +355,7 @@ public class ClientDAO implements DAO<Client> {
     }
 
     @Override
-    public Client findByName(String name) {
+    public List<Client> findByName(String name) {
         return null;
     }
 
@@ -369,11 +379,4 @@ public class ClientDAO implements DAO<Client> {
         return null;
     }
 
-    @Override
-    public List<Client> findAllByVideoID(Long videoID) {
-        return null;
-    }
-
-    @Override
-    public void deleteUserHistory(Long userID) {}
 }

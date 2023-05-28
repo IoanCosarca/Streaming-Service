@@ -11,6 +11,7 @@ import java.util.List;
  * The class that controls the operations on the Video table, not how they are implemented.
  */
 @RestController
+@RequestMapping(path = "api")
 public class VideoController {
     private VideoService videoService;
 
@@ -30,12 +31,22 @@ public class VideoController {
     }
 
     /**
+     * Returns the Video with the specified id.
+     * @param id search criteria
+     * @return Video
+     */
+    @GetMapping("/getVideoByID/{id}")
+    public Video getVideoByID(@PathVariable Long id) {
+        return videoService.getVideoByID(id);
+    }
+
+    /**
      * Returns the Video with the specified name
      * @param name search criteria
      * @return Video
      */
     @GetMapping("/getVideoByName/{name}")
-    public Video getVideoByName(@PathVariable String name) {
+    public List<Video> getVideoByName(@PathVariable String name) {
         return videoService.getVideoByName(name);
     }
 
@@ -75,7 +86,6 @@ public class VideoController {
      */
     @PostMapping("/addVideo")
     public void addVideo(@RequestBody Video video) {
-        System.out.println(video.toString());
         videoService.saveVideo(video);
     }
 
@@ -83,9 +93,9 @@ public class VideoController {
      * Updates the details of a Video in the database.
      * @param video the instance containing all the modified values to be added in the database
      */
-    @PutMapping("/updateVideos")
+    @PutMapping("/updateVideo")
     public void updateVideos(@RequestBody Video video) {
-        videoService.updateVideos(video);
+        videoService.updateVideo(video);
     }
 
     /**
@@ -97,12 +107,4 @@ public class VideoController {
         videoService.deleteVideoByID(id);
     }
 
-    /**
-     * Deletes the Video with the specified name.
-     * @param name delete criteria
-     */
-    @DeleteMapping("/deleteVideoByName/{name}")
-    public void deleteVideoByName(@PathVariable String name) {
-        videoService.deleteVideoByName(name);
-    }
 }

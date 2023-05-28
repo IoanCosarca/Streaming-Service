@@ -50,21 +50,17 @@ public class VideoDAO implements DAO<Video> {
         return list;
     }
 
-    /**
-     * Gets the connection, calls a query to get the Video from the database with the given name and returns it.
-     * @param name selection criteria
-     * @return Video
-     */
-    public Video findByName(String name)
+    @Override
+    public Video findByID(Long id)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM video WHERE name = ?";
+        String query = "SELECT * FROM video WHERE id = ?";
         try
         {
             statement = dbConnection.prepareStatement(query);
-            statement.setString(1, name);
+            statement.setLong(1, id);
             rs = statement.executeQuery();
             rs.next();
             return constructVideo(rs);
@@ -81,6 +77,39 @@ public class VideoDAO implements DAO<Video> {
     }
 
     /**
+     * Gets the connection, calls a query to get the Video from the database with the given name and returns it.
+     * @param name selection criteria
+     * @return Video
+     */
+    public List<Video> findByName(String name)
+    {
+        Connection dbConnection = ConnectionFactory.getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        List <Video> list = new ArrayList<>();
+        String query = "SELECT * FROM video WHERE name LIKE CONCAT('%', ?, '%')";
+        try
+        {
+            statement = dbConnection.prepareStatement(query);
+            statement.setString(1, name);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                list.add(constructVideo(rs));
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            ConnectionFactory.close(rs);
+            ConnectionFactory.close(statement);
+            ConnectionFactory.close(dbConnection);
+        }
+        return list;
+    }
+
+    /**
      * Gets the connection, calls a query to get all the Videos in the database from a specified channel and returns them as list.
      * @param channel selection criteria
      * @return List[Video]
@@ -91,7 +120,7 @@ public class VideoDAO implements DAO<Video> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         List <Video> list = new ArrayList<>();
-        String query = "SELECT * FROM video WHERE channel = ?";
+        String query = "SELECT * FROM video WHERE channel LIKE CONCAT('%', ?, '%')";
         try
         {
             statement = dbConnection.prepareStatement(query);
@@ -180,7 +209,7 @@ public class VideoDAO implements DAO<Video> {
     }
 
     /**
-     * Give a result set entry from a query, constructs a Video object with the fields and returns it.
+     * Given a result set entry from a query, constructs a Video object with the fields and returns it.
      * @param rs result set containing the fields from the table
      * @return Video
      * @throws SQLException the SQL exception will be handled where the method is called
@@ -209,11 +238,18 @@ public class VideoDAO implements DAO<Video> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query = "INSERT INTO video (id, name, channel, genre, ageRestriction, link, startHour, endHour, status) ";
-        query += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        ResultSet rs = null;
+        String query1 = "SELECT MAX(id) FROM video";
+        String query2 = "INSERT INTO video (id, name, channel, genre, ageRestriction, link, startHour, endHour, status) ";
+        query2 += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try
         {
-            statement = dbConnection.prepareStatement(query);
+            statement = dbConnection.prepareStatement(query1);
+            rs = statement.executeQuery();
+            rs.next();
+            video.setId(rs.getLong("MAX(id)") + 1);
+            // Insert video
+            statement = dbConnection.prepareStatement(query2);
             statement.setLong(1, video.getId());
             statement.setString(2, video.getName());
             statement.setString(3, video.getChannel());
@@ -222,7 +258,7 @@ public class VideoDAO implements DAO<Video> {
             statement.setString(6, video.getLink());
             statement.setInt(7, video.getStartHour());
             statement.setInt(8, video.getEndHour());
-            statement.setString(9, video.getStatus().toString());
+            statement.setString(9, video.initializeStatus().toString());
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -230,6 +266,7 @@ public class VideoDAO implements DAO<Video> {
         }
         finally
         {
+            ConnectionFactory.close(rs);
             ConnectionFactory.close(statement);
             ConnectionFactory.close(dbConnection);
         }
@@ -297,11 +334,6 @@ public class VideoDAO implements DAO<Video> {
     }
 
     @Override
-    public Video findByID(Long id) {
-        return null;
-    }
-
-    @Override
     public Video findByEmail(String email) {
         return null;
     }
@@ -321,11 +353,4 @@ public class VideoDAO implements DAO<Video> {
         return null;
     }
 
-    @Override
-    public List<Video> findAllByVideoID(Long videoID) {
-        return null;
-    }
-
-    @Override
-    public void deleteUserHistory(Long userID) {}
 }

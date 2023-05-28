@@ -11,6 +11,7 @@ import java.util.List;
  * The class that controls the operations on the Admin table, not how they are implemented.
  */
 @RestController
+@RequestMapping(path = "api")
 public class AdminController {
     private AdminService adminService;
 
@@ -31,17 +32,17 @@ public class AdminController {
 
     /**
      * Returns the Admin with the specified id.
-     * @param id search criteria
+     * @param userID search criteria
      * @return Admin
      */
-    @GetMapping("/getAdminByID/{id}")
-    public Admin getAdminByID(@PathVariable Long id) {
-        return adminService.getAdminByID(id);
+    @GetMapping("/getAdminByID/{userID}")
+    public Admin getAdminByID(@PathVariable Long userID) {
+        return adminService.getAdminByID(userID);
     }
 
     /**
      * Returns the Admin with the specified email.
-     * @param email seatch criteria
+     * @param email search criteria
      * @return Admin
      */
     @GetMapping("/getAdminByEmail/{email}")
@@ -69,10 +70,10 @@ public class AdminController {
 
     /**
      * Deletes the Admin with the specified id.
-     * @param id delete criteria
+     * @param userID delete criteria
      */
-    @DeleteMapping("/deleteAdmin/{id}")
-    public void deleteAdmin(@PathVariable Long id) {
-        adminService.deleteAdminByID(id);
+    @DeleteMapping("/deleteAdmin/{userID}")
+    public void deleteAdmin(@PathVariable Long userID) {
+        adminService.deleteAdminByID(userID);
     }
 }

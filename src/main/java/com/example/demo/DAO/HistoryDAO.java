@@ -4,10 +4,7 @@ import com.example.demo.Connection.ConnectionFactory;
 import com.example.demo.Model.History;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class HistoryDAO implements DAO<History> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         List<History> list = new ArrayList<>();
-        String query = "SELECT * FROM history";
+        String query = "SELECT * FROM history ORDER BY date DESC, time DESC";
         try
         {
             statement = dbConnection.prepareStatement(query);
@@ -59,7 +56,7 @@ public class HistoryDAO implements DAO<History> {
         PreparedStatement statement = null;
         ResultSet rs = null;
         List<History> list = new ArrayList<>();
-        String query = "SELECT * FROM history WHERE userID = ?";
+        String query = "SELECT * FROM history WHERE userID = ? ORDER BY date DESC, time DESC";
         try
         {
             statement = dbConnection.prepareStatement(query);
@@ -82,40 +79,7 @@ public class HistoryDAO implements DAO<History> {
     }
 
     /**
-     * Gets the connection, calls a query to get all the entries in the database where the videoID is the specified one and returns them as list.
-     * @param videoID selection criteria
-     * @return List[History]
-     */
-    public List<History> findAllByVideoID(Long videoID)
-    {
-        Connection dbConnection = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        ResultSet rs = null;
-        List<History> list = new ArrayList<>();
-        String query = "SELECT * FROM history WHERE videoID = ?";
-        try
-        {
-            statement = dbConnection.prepareStatement(query);
-            statement.setLong(1, videoID);
-            rs = statement.executeQuery();
-            while (rs.next()) {
-                list.add(constructHistory(rs));
-            }
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        finally
-        {
-            ConnectionFactory.close(rs);
-            ConnectionFactory.close(statement);
-            ConnectionFactory.close(dbConnection);
-        }
-        return list;
-    }
-
-    /**
-     * Give a result set entry from a query, constructs a History object with the fields and returns it.
+     * Given a result set entry from a query, constructs a History object with the fields and returns it.
      * @param rs result set containing the fields from the table
      * @return History
      * @throws SQLException the SQL exception will be handled where the method is called
@@ -123,9 +87,10 @@ public class HistoryDAO implements DAO<History> {
     private History constructHistory(ResultSet rs) throws SQLException
     {
         History history = new History();
-        history.setId(rs.getLong("id"));
         history.setUserID(rs.getLong("userID"));
         history.setVideoID(rs.getLong("videoID"));
+        history.setDate(String.valueOf(rs.getDate("date")));
+        history.setTime(String.valueOf(rs.getTime("time")));
         return history;
     }
 
@@ -138,41 +103,14 @@ public class HistoryDAO implements DAO<History> {
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
-        String query = "INSERT INTO history (id, userID, videoID) VALUES (?, ?, ?)";
-        try
-        {
-            statement = dbConnection.prepareStatement(query);
-            statement.setLong(1, history.getId());
-            statement.setLong(2, history.getUserID());
-            statement.setLong(3, history.getVideoID());
-            statement.executeUpdate();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        finally
-        {
-            ConnectionFactory.close(statement);
-            ConnectionFactory.close(dbConnection);
-        }
-    }
-
-    /**
-     * Gets the connection and calls a query to update the database with the History object.
-     * @param history object containing the new information for the History entry with the same id
-     */
-    @Override
-    public void update(History history)
-    {
-        Connection dbConnection = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        String query = "UPDATE history SET ";
-        query += "userID = ?, videoID = ? WHERE id = " + history.getId();
+        String query = "INSERT INTO history (userID, videoID, date, time) VALUES (?, ?, ?, ?)";
         try
         {
             statement = dbConnection.prepareStatement(query);
             statement.setLong(1, history.getUserID());
             statement.setLong(2, history.getVideoID());
+            statement.setDate(3, Date.valueOf(history.getDate()));
+            statement.setTime(4, Time.valueOf(history.getTime()));
             statement.executeUpdate();
         }
         catch (SQLException e) {
@@ -187,35 +125,10 @@ public class HistoryDAO implements DAO<History> {
 
     /**
      * Gets the connection and calls a query to delete the entry with the given id from the database.
-     * @param id delete criteria
-     */
-    @Override
-    public void delete(Long id)
-    {
-        Connection dbConnection = ConnectionFactory.getConnection();
-        PreparedStatement statement = null;
-        String query = "DELETE FROM history WHERE id = ?";
-        try
-        {
-            statement = dbConnection.prepareStatement(query);
-            statement.setLong(1, id);
-            statement.execute();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        finally
-        {
-            ConnectionFactory.close(statement);
-            ConnectionFactory.close(dbConnection);
-        }
-    }
-
-    /**
-     * Gets the connection and calls a query to delete the watch history of the user with the specified id from the database.
      * @param userID delete criteria
      */
-    public void deleteUserHistory(Long userID)
+    @Override
+    public void delete(Long userID)
     {
         Connection dbConnection = ConnectionFactory.getConnection();
         PreparedStatement statement = null;
@@ -235,6 +148,9 @@ public class HistoryDAO implements DAO<History> {
             ConnectionFactory.close(dbConnection);
         }
     }
+
+    @Override
+    public void update(History history) {}
 
     @Override
     public History findByID(Long id) {
@@ -257,7 +173,7 @@ public class HistoryDAO implements DAO<History> {
     }
 
     @Override
-    public History findByName(String name) {
+    public List<History> findByName(String name) {
         return null;
     }
 

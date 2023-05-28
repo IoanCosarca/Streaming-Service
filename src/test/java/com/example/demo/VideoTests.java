@@ -36,7 +36,7 @@ public class VideoTests {
     @Test
     void testFindByName()
     {
-        Video video = new Video();
+        List<Video> video = new ArrayList<>();
         VideoService videoService = new VideoService(dao);
         videoService.getVideoByName("BZRP");
         when (dao.findByName("BZRP")).thenReturn(video);
@@ -87,26 +87,15 @@ public class VideoTests {
     {
         Video video = new Video();
         VideoService videoService = new VideoService(dao);
-        videoService.updateVideos(video);
+        videoService.updateVideo(video);
         verify(dao).update(video);
     }
 
     @Test
-    void testRegDelete()
+    void testDelete()
     {
         VideoService videoService = new VideoService(dao);
         videoService.deleteVideoByID(1L);
         verify(dao).delete(1L);
-    }
-
-    @Test
-    void testDeleteByName()
-    {
-        Video video = new Video(9L, "", "SHAKIRA || BZRP Music Sessions #53", VideoGenre.Kids, false, "0000", 10, 12);
-        VideoService videoService = new VideoService(dao);
-        when (dao.findByName("SHAKIRA || BZRP Music Sessions #53")).thenReturn(video);
-        videoService.deleteVideoByName("SHAKIRA || BZRP Music Sessions #53");
-        verify(dao).findByName("SHAKIRA || BZRP Music Sessions #53");
-        verify(dao).delete(9L);
     }
 }
