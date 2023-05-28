@@ -60,7 +60,7 @@ Tabela History conține istoricul tuturor utilizatorilor. Aceasta are două Fore
 
 Tabels Messages reține mesajele primite de fiecare utilizator, având ca și câmpuri id-ul utilizatorului și textul mesajului.
 
-![Table Diagram](https://plantuml.github.io/plantuml-core/raw.html?fLF1QW8n4BtdAmOlGc6XhTQ3Y51QYgMqXq9xZvlH7SmcIpAhNLp_lScwhIiABNW9-zwyVNapIVgGaKBW3C4NbaM3KdAfHY7w8DUM51JEpZNc7ZR46KYprAWWTNRZOO78mg_85DB973GPvAf0i8upAmGQ9gwWz-7HzK1wmEiRs0g0gp8mpuym1bFcStGmcIpHe9ECQZeDWYI9giPh38nV7E62dEStcNSvBKyep2Nf3Ywaznlhr0-rEmIxLpcPDjdjFXcflrATPdzw2UMExOEcyDdw3Yxq3HMvn5ywujIMXbrrfg7FS82stNZututDyVpIJ1g3tGc6drnN4VAyesT7APCreJ2tLZUdGMRLqNcMZcUsT4VfqQWJBYYvz6SQcf5dwwgsfRlBPxcE4pfVKi5a375jBX_b0SMrc-SLlG_j-pRGwF90-Twnqtfu97MT97KTR-Kn78WuXDe6k8slgO6xkeN3WpZ2qJS0)
+![img.png](img.png)
 
 ## Endpoints
 
