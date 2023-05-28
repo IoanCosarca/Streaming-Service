@@ -1,0 +1,16 @@
+<div class="videos-home">
+    <div class="videoObj-home" *ngFor="let videoData of videoEntries; let i=index">
+        <div class="overlay" (click)="handleClick(videoEntries[i])"></div>
+        <youtube-player class="video"
+            [videoId]="videoData.link"
+            suggestedQuality="highres"
+            [height]="200"
+            [width]="350"
+        ></youtube-player>
+        <div class="video-title">{{ videoData.name }}</div>
+        <div class="channel">Channel: {{ videoData.channel }}</div>
+        <div class="genre">{{ videoData.genre }}</div>
+        <div class="time">Availability: {{ videoData.startHour }}:00 - {{ videoData.endHour }}:00</div>
+        <div class="status">Status: {{ videoData.status }}</div>
+    </div>
+</div>

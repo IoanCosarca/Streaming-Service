@@ -1,0 +1,11 @@
+.video-wrapper {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.video-Obj {
+    margin: 25px;
+    width: 28%;
+}

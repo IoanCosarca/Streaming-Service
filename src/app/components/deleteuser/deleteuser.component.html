@@ -1,0 +1,22 @@
+<div className="form-wrapper">
+    <app-button routerLink="/" color="black" text="Go Back" fontsize="20px"></app-button>
+    <form class="form" (submit)="deleteClicked()">
+        <h2 class="title"> Are you sure you want to delete your account? </h2>
+        <div className="form-control">
+            <label className="label"> Type in your Password </label>
+            <input className="input"
+                [(ngModel)]="userData.password"
+                id="password"
+                type={{showOption}}
+                name="password"
+                autocomplete="new-password"
+            />
+        </div>
+        <div class="passOption">
+            <input class="check" type="checkbox" (change)="changeVisibility()" /> Show Password
+        </div>
+        <div class="buttons">
+            <app-button color="black" text="Delete Account" fontsize="20px" type="submit"></app-button>
+        </div>
+    </form>
+</div>

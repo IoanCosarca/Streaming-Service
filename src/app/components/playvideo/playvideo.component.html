@@ -1,0 +1,12 @@
+<div class="video-wrapper">
+    <app-button routerLink="/" color="white" text="Go Back" fontsize="20px" (btnClick)="freeVideo()"></app-button>
+    <div class="video-body">
+        <youtube-player class="playvideo"
+            [videoId]="videoData.link"
+            [playerVars]="{controls: 1, autoplay: 1}"
+            suggestedQuality="highres"
+            [height]="560"
+            [width]="980"
+        ></youtube-player>
+    </div>
+</div>

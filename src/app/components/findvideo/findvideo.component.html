@@ -1,0 +1,39 @@
+<form (submit)="find()">
+    <h1 class="title"> Search Videos </h1>
+    <div className="form-control">
+        <label className="label"> Name </label>
+        <input className="input" [(ngModel)]="videoData.name" type="name" name="name" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Channel </label>
+        <input className="input" [(ngModel)]="videoData.channel" type="channel" name="channel" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Genre </label>
+        <input className="input" [(ngModel)]="videoData.genre" type="genre" name="genre" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Start Hour </label>
+        <input className="input" [(ngModel)]="videoData.startHour" type="startHour" name="startHour" />
+    </div>
+    <div class="buttons">
+        <app-button color="black" text="Find" fontsize="20px" type="submit"></app-button>
+    </div>
+    <div class="title"></div>
+
+    <div class="video-wrapper">
+        <div class="video-Obj" *ngFor="let videoData of foundVideos; let i=index">
+            <youtube-player
+                [videoId]="videoData.link"
+                suggestedQuality="highres"
+                [height]="200"
+                [width]="350"
+            ></youtube-player>
+            <div class="video-title">{{ videoData.name }}</div>
+            <div class="channel">Channel: {{ videoData.channel }}</div>
+            <div class="genre">{{ videoData.genre }}</div>
+            <div class="time">Availability: {{ videoData.startHour }}:00 - {{ videoData.endHour }}:00</div>
+            <app-button style="background-color: red;" color="white" text="Delete" fontsize="20px" (btnClick)="deleteVideo(foundVideos[i].id)"></app-button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,17 @@
+<div class="admin-wrapper">
+    <app-button routerLink="/" color="white" text="Go Back" fontsize="20px"></app-button>
+    <div class="admin-body">
+        <app-button color="black" text="See Users" fontsize="20px" (btnClick)="toggleUsers()"></app-button>
+        <app-button color="black" text="Add Video" fontsize="20px" (btnClick)="toggleAddVideo()"></app-button>
+        <app-button color="black" text="Find / Delete Video" fontsize="20px" (btnClick)="toggleFDVideo()"></app-button>
+        <div *ngIf="page == 0" class="wrapper">
+            <app-seeuser></app-seeuser>
+        </div>
+        <div *ngIf="page == 1" class="wrapper">
+            <app-addvideos></app-addvideos>
+        </div>
+        <div *ngIf="page == 2" class="wrapper">
+            <app-findvideo></app-findvideo>
+        </div>
+    </div>
+</div>

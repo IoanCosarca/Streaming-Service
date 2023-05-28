@@ -1,0 +1,59 @@
+<div className="form-wrapper">
+    <app-button routerLink="/" color="Black" text="Go Back" fontsize="20px"></app-button>
+    <form (submit)="update()" autocomplete="new-password">
+        <div *ngIf="userData.type == 'CLIENT'">
+            <h1 class="title"> Your Profile </h1>
+            <div className="form-control">
+                <label className="label"> First Name </label>
+                <input className="input" [(ngModel)]="userData.firstName" id="firstName" type="firstName"
+                    name="firstName" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Last Name </label>
+                <input className="input" [(ngModel)]="userData.lastName" id="lastName" type="lastName" name="lastName" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Email </label>
+                <input className="input" [(ngModel)]="userData.email" id="email" type="email" name="email" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Password </label>
+                <input className="input" [(ngModel)]="userData.password" id="password" type="text" name="password" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Age </label>
+                <input className="input" [(ngModel)]="userData.age" id="age" type="age" name="age" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Country </label>
+                <input className="input" [(ngModel)]="userData.country" id="country" type="country" name="country" />
+            </div>
+            <div class="buttons">
+                <app-button color="black" text="Update Profile" fontsize="20px" type="submit"></app-button>
+            </div>
+        </div>
+        <div *ngIf="userData.type == 'ADMIN'">
+            <h1 class="title"> Your Profile </h1>
+            <div className="form-control">
+                <label className="label"> First Name </label>
+                <input className="input" [(ngModel)]="userData.firstName" id="firstName" type="firstName"
+                    name="firstName" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Last Name </label>
+                <input className="input" [(ngModel)]="userData.lastName" id="lastName" type="lastName" name="lastName" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Email </label>
+                <input className="input" [(ngModel)]="userData.email" id="email" type="email" name="email" />
+            </div>
+            <div className="form-control">
+                <label className="label"> Password </label>
+                <input className="input" [(ngModel)]="userData.password" id="password" type="text" name="password" />
+            </div>
+            <div class="buttons">
+                <app-button color="black" text="Update Profile" fontsize="20px" type="submit"></app-button>
+            </div>
+        </div>
+    </form>
+</div>

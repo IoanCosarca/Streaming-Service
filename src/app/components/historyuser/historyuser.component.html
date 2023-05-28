@@ -1,0 +1,13 @@
+<div class="user-history">
+    <app-button color="white" text="Delete History" fontsize="20px" (btnClick)="deleteHistory()"></app-button>
+    <div class="history-obj" *ngFor="let historyData of historyEntries; let i=index">
+        <div class="date-time">
+            <div class="date"> {{ historyData.date }} </div>
+            <div class="time"> {{ historyData.time }} </div>
+        </div>
+        <div class="video-info" *ngIf="videoEntries[i]">
+            <div class="video-title"> Video: {{ videoEntries[i].name }} </div>
+            <div class="channel"> Channel: {{ videoEntries[i].channel }} </div>
+        </div>
+    </div>
+</div>

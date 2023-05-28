@@ -1,0 +1,46 @@
+<form (submit)="find()">
+    <h1 class="title"> See Users </h1>
+    <div className="form-control">
+        <label className="label"> UserID </label>
+        <input className="input" [(ngModel)]="userData.userID" id="userID" type="userID" name="userID" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Email </label>
+        <input className="input" [(ngModel)]="userData.email" id="email" type="email" name="email" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Age </label>
+        <input className="input" [(ngModel)]="userData.age" id="age" type="age" name="age" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Country </label>
+        <input className="input" [(ngModel)]="userData.country" id="country" type="country" name="country" />
+    </div>
+    <div class="buttons">
+        <app-button color="black" text="Find" fontsize="20px" type="submit"></app-button>
+    </div>
+    <div class="title"></div>
+
+    <div class="users-wrapper">
+        <div class="userObj" *ngFor="let user of foundUsers">
+            <img class="userpic" src="assets/User-avatar.png">
+            <div>User ID: {{ user.userID }}</div>
+            <div>First Name: {{ user.firstName }}</div>
+            <div>Last Name: {{ user.lastName }}</div>
+            <div>
+                Type: 
+                <button mat-button [matMenuTriggerFor]="menu"> {{ user.type }} </button>
+                <mat-menu #menu="matMenu">
+                    <button *ngIf="user.type === 'CLIENT'" mat-menu-item> ADMIN </button>
+                    <button *ngIf="user.type === 'ADMIN'" mat-menu-item> CLIENT </button>
+                </mat-menu>
+            </div>
+            <div>Email: {{ user.email }}</div>
+            <div>Password: {{ user.password }}</div>
+            <div *ngIf="user.type === 'CLIENT'">
+                <div>Age: {{ user.age }}</div>
+                <div>Country: {{ user.country }}</div>
+            </div>
+        </div>
+    </div>
+</form>

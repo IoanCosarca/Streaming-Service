@@ -1,0 +1,19 @@
+.admin-wrapper {
+    background-color: #1c1f28;
+    height: 100%;
+}
+
+.admin-body {
+    display: block;
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 150px;
+}
+
+.wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+}

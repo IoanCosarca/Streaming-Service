@@ -1,0 +1,33 @@
+<form (submit)="add()">
+    <div className="form-control">
+        <label className="label"> Name </label>
+        <input className="input" [(ngModel)]="videoData.name" type="name" name="name" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Channel </label>
+        <input className="input" [(ngModel)]="videoData.channel" type="channel" name="channel" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Genre </label>
+        <input className="input" [(ngModel)]="videoData.genre" type="genre" name="genre" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Age Restriction </label>
+        <input className="input" [(ngModel)]="videoData.ageRestriction" type="ageRestriction" name="ageRestriction" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Link </label>
+        <input className="input" [(ngModel)]="videoData.link" type="link" name="link" />
+    </div>
+    <div className="form-control">
+        <label className="label"> Start Hour </label>
+        <input className="input" [(ngModel)]="videoData.startHour" type="startHour" name="startHour" />
+    </div>
+    <div className="form-control">
+        <label className="label"> End Hour </label>
+        <input className="input" [(ngModel)]="videoData.endHour" type="endHour" name="endHour" />
+    </div>
+    <div class="buttons">
+        <app-button color="black" text="Add" fontsize="20px" type="submit"></app-button>
+    </div>
+</form>

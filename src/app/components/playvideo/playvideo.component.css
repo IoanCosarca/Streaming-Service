@@ -1,0 +1,14 @@
+.video-wrapper {
+    background-color: #1c1f28;
+}
+
+.video-body {
+    padding: 50px;
+}
+
+.playvideo {
+    display: flex;
+    flex-direction: column;
+    background-color: #1c1f28;
+    align-items: center;
+}

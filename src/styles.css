@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    display: grid;
+	font-family: "Poppins", sans-serif;
+	margin: 0px;
+    height: 100%;
+    padding: 0px;
+}
+
+.home-body {
+    display: block;
+    height: 100%;
+}
+
+.content {
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.comp-navbar {
+    width: 20%;
+    background-color: #151515;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    min-width: 100px;
+    min-height: 400px;
+    padding: 20px 40px;
+    border-radius: 6px;
+    box-shadow: 0px 8px 36px #222;
+    background-color: white;
+}
+
+.form {
+    width: 50%;
+    margin: 80px auto;
+    padding: 16px 16px 24px;
+    box-shadow: 0 2px 32px #222;
+    background-color: white;
+}
+
+.passOption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.check {
+    width: 5%;
+}
+
+.title {
+    text-align: center;
+    padding-bottom: 4x;
+    border-bottom: 1px solid black;
+}
+
+.form-control {
+    display: grid;
+    grid-column: 1;
+    margin-bottom: 16px;
+}
+
+label,
+.label {
+    font-size: 25px;
+    margin-bottom: 0.5em;
+    font-weight: lighter;
+}
+
+input,
+.input {
+    width: 100%;
+    font-size: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

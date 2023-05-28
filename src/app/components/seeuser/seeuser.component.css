@@ -1,0 +1,16 @@
+.users-wrapper {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.userObj {
+    margin: 10px;
+    width: 23%;
+}
+
+.userpic {
+    width: 200px;
+    height: 200px;
+}

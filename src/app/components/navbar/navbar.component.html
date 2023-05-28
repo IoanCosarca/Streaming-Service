@@ -1,0 +1,26 @@
+<app-button class="top-navbar" color="white" text="History" fontsize="25px"
+    (btnClick)="toggleHistory()"></app-button>
+<app-button *ngIf="userData.type == 'ADMIN'" routerLink="/Admin" class="top-navbar" color="white" text="Admin" fontsize="25px"
+    (btnClick)="toggleAdmin()"></app-button>
+<div class="body-navbar">
+    <app-button class="nav-options" color="white" text="Animals" fontsize="25px"
+        (btnClick)="toggleCategory('Animals')"></app-button>
+    <app-button class="nav-options" color="white" text="Comedy" fontsize="25px"
+        (btnClick)="toggleCategory('Comedy')"></app-button>
+    <app-button class="nav-options" color="white" text="Documentary" fontsize="25px"
+        (btnClick)="toggleCategory('Documentary')"></app-button>
+    <app-button class="nav-options" color="white" text="Games" fontsize="25px"
+        (btnClick)="toggleCategory('Games')"></app-button>
+    <app-button class="nav-options" color="white" text="Food" fontsize="25px"
+        (btnClick)="toggleCategory('Food')"></app-button>
+    <app-button class="nav-options" color="white" text="Kids" fontsize="25px"
+        (btnClick)="toggleCategory('Kids')"></app-button>
+    <app-button class="nav-options" color="white" text="Music" fontsize="25px"
+        (btnClick)="toggleCategory('Music')"></app-button>
+    <app-button class="nav-options" color="white" text="Trailers" fontsize="25px"
+        (btnClick)="toggleCategory('Trailers')"></app-button>
+    <app-button class="nav-options" color="white" text="Tutorials" fontsize="25px"
+        (btnClick)="toggleCategory('Tutorials')"></app-button>
+    <app-button class="nav-options" color="white" text="Vlogs" fontsize="25px"
+        (btnClick)="toggleCategory('Vlogs')"></app-button>
+</div>

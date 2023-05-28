@@ -1,0 +1,15 @@
+.messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-obj{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 20px #222;
+}

@@ -1,0 +1,21 @@
+<header>
+    <div class="header-info">
+        <app-button color="white" text="{{title}}" fontsize="30px" (btnClick)="toggleHome()"></app-button>
+    </div>
+    <app-search class="header-search" (searchCommand)="handleSearch($event)"></app-search>
+    <div *ngIf="userData.id == 0 && userData.userID == 0" class="header-btns">
+        <app-button routerLink="/Login" color="white" text="Log In" fontsize="20px"
+            (btnClick)="toggleLogIn()"></app-button>
+        <app-button routerLink="/Register" color="white" text="Register" fontsize="20px"
+            (btnClick)="toggleRegister()"></app-button>
+    </div>
+    <div *ngIf="userData.id != 0 && userData.userID != 0" class="header-btns" style="margin-right: 30px;">
+        <button mat-button [matMenuTriggerFor]="menu">{{ userData.firstName }} {{ userData.lastName }}</button>
+        <mat-menu #menu="matMenu">
+            <button routerLink="/Profile" mat-menu-item> Manage Profile </button>
+            <button routerLink="/Notifications" mat-menu-item> Notifications </button>
+            <button mat-menu-item (click)="logout()"> Log Out </button>
+            <button style="background-color: red;" mat-menu-item (click)="deleteAccount()"> Delete Account </button>
+        </mat-menu>
+    </div>
+</header>

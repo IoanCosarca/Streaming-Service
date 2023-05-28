@@ -1,0 +1,12 @@
+<div class="history" *ngIf="userID != 0">
+    <div *ngIf="userType == 'ADMIN'">
+        <app-button color="white" text="See Your History" fontsize="20px" (btnClick)="userHistory()"></app-button>
+        <app-button color="white" text="See Global History" fontsize="20px" (btnClick)="globalHistory()"></app-button>
+    </div>
+    <div *ngIf="historyPage == 0">
+        <app-historyuser [userID]="userID"></app-historyuser>
+    </div>
+    <div *ngIf="historyPage == 1">
+        <app-historyglobal></app-historyglobal>
+    </div>
+</div>

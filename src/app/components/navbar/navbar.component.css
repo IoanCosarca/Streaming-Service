@@ -1,0 +1,16 @@
+.top-navbar {
+    display: grid;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+.body-navbar {
+    display: grid;
+    grid-column: 1;
+    border-top: 1px solid gray;
+}
+
+.nav-options {
+    display: grid;
+    align-items: center;
+}

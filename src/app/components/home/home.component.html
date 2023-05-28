@@ -1,0 +1,15 @@
+<div class="home-body">
+    <app-header [userData]="userData" (videosUpdated)="handleVideosUpdated($event)" (disconnect)="handleLogOff($event)" (changePage)="handlePage($event)"></app-header>
+    <div class="content">
+        <app-navbar class="comp-navbar" [userData]="userData" (videosUpdated)="handleVideosUpdated($event)" (changePage)="handlePage($event)"></app-navbar>
+        <div *ngIf="page == 0" class="videosmain">
+            <app-videohome class="videosmain" [videoEntries]="videoEntries" [userID]="userData.userID"></app-videohome>
+        </div>
+        <div *ngIf="page == 1" class="video-search">
+            <app-videosearch class="video-search" [videoEntries]="videoEntries" [userID]="userData.userID"></app-videosearch>
+        </div>
+        <div *ngIf="page == 2" class="video-search">
+            <app-history class="history" [userID]="userData.userID" [userType]="userData.type"></app-history>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div className="form-wrapper">
+    <app-button routerLink="/" color="black" text="Go Back" fontsize="20px"></app-button>
+    <form class="form" (submit)="loginClicked()" autocomplete="new-password">
+        <h1 class="title"> Log In </h1>
+        <div className="form-control">
+            <label className="label"> Email </label>
+            <input className="input"
+                [(ngModel)]="userData.email"
+                id="email"
+                type="email"
+                name="email"
+                autocomplete="new-password"
+            />
+        </div>
+        <div className="form-control">
+            <label className="label"> Password </label>
+            <input className="input"
+                [(ngModel)]="userData.password"
+                id="password"
+                type={{showOption}}
+                name="password"
+                autocomplete="new-password"
+            />
+        </div>
+        <div class="passOption">
+            <input class="check" type="checkbox" (change)="changeVisibility()" /> Show Password
+        </div>
+        <div class="buttons">
+            <app-button color="black" text="Log In" fontsize="20px" type="submit"></app-button>
+            <app-button routerLink="/Register" color="black" text="Register" fontsize="20px" type="submit"></app-button>
+        </div>
+    </form>
+</div>

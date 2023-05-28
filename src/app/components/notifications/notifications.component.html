@@ -1,0 +1,8 @@
+<div class="notification">
+    <app-button routerLink="/" color="black" text="Go Back" fontsize="20px"></app-button>
+    <div class="messages-wrapper">
+        <div class="message-obj" *ngFor="let message of messageEntries">
+            <div class="message-text"> {{ message.message }} </div>
+        </div>
+    </div>
+</div>

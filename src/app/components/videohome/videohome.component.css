@@ -1,0 +1,54 @@
+.videos-home {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: normal;
+    justify-content: normal;
+    align-items: normal;
+}
+
+.videoObj-home {
+    margin-left: 25px;
+    margin-right: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 31%;
+}
+
+.video {
+    position: relative;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    background-color: transparent;
+    width: 350px;
+    height: 200px;
+    z-index: 2;
+}
+
+.video-title {
+    color: lightgray;
+    font-size: 20px;
+    font-weight: bold;
+    width: 350px;
+}
+
+.channel {
+    color: lightgray;
+    width: 350px;
+}
+
+.genre {
+    color: lightgray;
+}
+
+.time {
+    color: lightgray;
+}
+
+.status {
+    color: lightgray;
+}
